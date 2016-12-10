@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_passdetails"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="firebaseapps.com.pass.Passdetails"
+    android:background="@color/colorPrimary">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="230dp"
+                    android:layout_height="230dp"
+                    android:layout_marginLeft="60dp"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/profilephoto"
+                    android:background="@mipmap/ic_launcher"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Click to black patch to upload profile photo"
+                    android:id="@+id/clicktouploadprofilephoto"
+                    android:textColor="#fff"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/profilephoto"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:layout_width="95dp"
+                    android:textColor="#ffff"
+                    android:textSize="15sp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Name"
+                    android:id="@+id/names"/>
+
+                <EditText
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/name"
+                    android:hint="Enter the full name"
+                    android:background="#ffff"
+                    android:inputType="textPersonName"
+                    android:layout_marginLeft="40dp"
+                    android:ems="9"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:text="Address"
+                    android:textSize="15sp"
+                    android:textColor="#ffff"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:gravity="start"
+                    android:id="@+id/address"
+                    android:background="#ffff"
+                    android:hint="Enter your cuurrent address"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:text="Mobile"
+                    android:textSize="15sp"
+                    android:textColor="#ffff"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:hint="Enter your mobile number "
+                    android:inputType="phone"
+                    android:id="@+id/mobile"
+                    android:background="#ffff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:text="ID number"
+                    android:textSize="15sp"
+                    android:textColor="#ffff"/>
+                <EditText
+                    android:hint="Enter your Id.no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:id="@+id/id_no"
+                    android:background="#ffff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:text="Date of birth"
+                    android:textSize="15sp"
+                    android:textColor="#ffff"/>
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:id="@+id/DOB"
+                    android:textColor="#ffff"
+                    android:hint="DD-MM-YYYY"
+                    android:textColorHint="#ffff"
+                    android:inputType="date"
+                    android:background="@color/colorPrimary" />
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/DOBDate"
+                    android:background="@mipmap/ic_date_range_white_24dp"
+                    android:layout_height="40dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:text="Purpose of visit"
+                    android:textSize="15sp"
+                    android:textColor="#ffff"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:id="@+id/reason"
+                    android:hint="Enter your purpose of visit"
+                    android:background="#ffff" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:text="Date of journey"
+                    android:textSize="15sp"
+                    android:textColor="#ffff"/>
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:id="@+id/DOJ"
+                    android:textColor="#ffff"
+                    android:hint="DD-MM-YYYY"
+                    android:textColorHint="#ffff"
+                    android:inputType="date"
+                    android:background="@color/colorPrimary" />
+
+                <ImageButton
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="40dp"
+                    android:id="@+id/DOJDate"
+                    android:background="@mipmap/ic_date_range_white_24dp"
+                    android:layout_height="40dp" />
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="90dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:background="#413333"
+                    android:id="@+id/scan_pic"/>
+
+                <TextView
+                    android:layout_alignLeft="@id/scan_pic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Click black patch to upload scan id proof"
+                    android:id="@+id/scan"
+                    android:layout_below="@+id/scan_pic"
+                    android:textSize="14sp"
+                    android:textColor="#ffff"/>
+
+            </RelativeLayout>
+
+
+
+            <LinearLayout
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Application status :"
+                    android:textSize="13sp"
+                    android:textColor="#ffff"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/application_status"
+                    android:layout_marginLeft="9dp"
+                    android:text="Payment pending"
+                    android:textIsSelectable="true"
+                    android:textColor="#ffff"
+                    android:textSize="13dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/transactionId"
+                    android:layout_marginLeft="9dp"
+                    android:textIsSelectable="true"
+                    android:textColor="#ffff"
+                    android:textSize="13dp"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_marginTop="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Proceed to payment"
+                    android:id="@+id/payment"/>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+
+
+    </ScrollView>
+
+</RelativeLayout>

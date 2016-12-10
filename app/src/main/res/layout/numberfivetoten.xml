@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:layout_width="660dp"
+                        android:layout_height="2dp"
+                        android:background="#ffff"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="23dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="start"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="#ffff"
+                        android:gravity="start"
+                        android:textSize="16dp"
+                        android:layout_width="wrap_content"
+                        android:text="Passenger  Pass Number  1 "
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:minWidth="173dp"
+                        android:id="@+id/pass1"
+                        android:background="#ffff"
+                        android:layout_height="wrap_content" />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="23dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="start"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="#ffff"
+                        android:gravity="start"
+                        android:textSize="16dp"
+                        android:layout_width="wrap_content"
+                        android:text="Passenger  Pass Number  2 "
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:minWidth="173dp"
+                        android:id="@+id/pass2"
+                        android:background="#ffff"
+                        android:layout_height="wrap_content" />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="23dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="start"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="#ffff"
+                        android:gravity="start"
+                        android:textSize="16dp"
+                        android:layout_width="wrap_content"
+                        android:text="Passenger  Pass Number  3 "
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:minWidth="173dp"
+                        android:id="@+id/pass3"
+                        android:background="#ffff"
+                        android:layout_height="wrap_content" />
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginTop="23dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="start"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="#ffff"
+                        android:gravity="start"
+                        android:textSize="16dp"
+                        android:layout_width="wrap_content"
+                        android:text="Passenger  Pass Number  4 "
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:minWidth="173dp"
+                        android:id="@+id/pass4"
+                        android:background="#ffff"
+                        android:layout_height="wrap_content" />
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginTop="23dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="start"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="#ffff"
+                        android:gravity="start"
+                        android:textSize="16dp"
+                        android:layout_width="wrap_content"
+                        android:text="Passenger  Pass Number  5 "
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:minWidth="173dp"
+                        android:id="@+id/pass5"
+                        android:background="#ffff"
+                        android:layout_height="wrap_content" />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="23dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="start"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="#ffff"
+                        android:gravity="start"
+                        android:textSize="16dp"
+                        android:layout_width="wrap_content"
+                        android:text="Passenger  Pass Number  6 "
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:minWidth="173dp"
+                        android:id="@+id/pass6"
+                        android:background="#ffff"
+                        android:layout_height="wrap_content" />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="23dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="start"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="#ffff"
+                        android:gravity="start"
+                        android:textSize="16dp"
+                        android:layout_width="wrap_content"
+                        android:text="Passenger  Pass Number  7 "
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:minWidth="173dp"
+                        android:id="@+id/pass7"
+                        android:background="#ffff"
+                        android:layout_height="wrap_content" />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="23dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="start"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="#ffff"
+                        android:gravity="start"
+                        android:textSize="16dp"
+                        android:layout_width="wrap_content"
+                        android:text="Passenger  Pass Number  8 "
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:minWidth="173dp"
+                        android:id="@+id/pass8"
+                        android:background="#ffff"
+                        android:layout_height="wrap_content" />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="23dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="start"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="#ffff"
+                        android:gravity="start"
+                        android:textSize="16dp"
+                        android:layout_width="wrap_content"
+                        android:text="Passenger  Pass Number  9 "
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:minWidth="173dp"
+                        android:id="@+id/pass9"
+                        android:background="#ffff"
+                        android:layout_height="wrap_content" />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="23dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="start"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="#ffff"
+                        android:gravity="start"
+                        android:textSize="15.5dp"
+                        android:layout_width="wrap_content"
+                        android:text="Passenger  Pass Number 10 "
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:minWidth="173dp"
+                        android:id="@+id/pass10"
+                        android:background="#ffff"
+                        android:layout_height="wrap_content" />
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginTop="23dp"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:text="BOOK"
+                        android:id="@+id/BOOK"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:layout_marginBottom="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="#ffff"/>
+
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+
+
+        </HorizontalScrollView>
+
+
+
+    </ScrollView>
+
+
+
+
+</LinearLayout>

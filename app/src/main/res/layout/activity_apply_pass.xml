@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_apply_pass"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="firebaseapps.com.pass.ApplyPass"
+    android:background="@color/colorPrimary">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:weightSum="100"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="vertical"
+                     android:layout_centerHorizontal="true"
+                     android:layout_centerVertical="true">
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:weightSum="100"
+                         android:layout_gravity="center"
+                         android:layout_height="wrap_content">
+
+
+                         <Button
+                             android:layout_marginTop="40dp"
+                             android:text="@string/apply_for_a_pass"
+                             android:layout_width="match_parent"
+                             android:layout_marginEnd="50dp"
+                             android:layout_height="wrap_content"
+                             android:id="@+id/getstarted"
+                             android:gravity="center"
+                             android:layout_weight="67"
+                             android:layout_marginBottom="28dp"
+                             android:layout_marginStart="50dp"
+                             android:layout_alignParentBottom="true"
+                             android:layout_alignParentStart="true"
+                              />
+
+                     </LinearLayout>
+
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:weightSum="100"
+                         android:layout_height="wrap_content">
+
+                         <Button
+                             android:layout_weight="65"
+                             android:layout_marginTop="20dp"
+                             android:text="CHECK PASS STATUS"
+                             android:layout_width="match_parent"
+                             android:layout_marginStart="50dp"
+                             android:layout_marginEnd="50dp"
+                             android:layout_height="wrap_content"
+                             android:id="@+id/checkpassstatus"
+                             android:layout_marginBottom="28dp"
+                             android:layout_alignParentBottom="true"
+                             android:layout_alignParentStart="true"
+                             />
+
+
+                     </LinearLayout>
+
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:weightSum="100"
+                         android:layout_height="wrap_content">
+
+                         <Button
+                             android:layout_weight="67"
+                             android:layout_marginTop="20dp"
+                             android:text="Login as admin"
+                             android:layout_width="match_parent"
+                             android:layout_marginEnd="50dp"
+                             android:layout_height="wrap_content"
+                             android:id="@+id/loginasadmin"
+                             android:layout_marginBottom="28dp"
+                             android:layout_alignParentBottom="true"
+                             android:layout_alignParentStart="true"
+                             android:layout_marginStart="50dp"/>
+
+
+                     </LinearLayout>
+
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:weightSum="100"
+                         android:layout_height="wrap_content">
+
+                         <Button
+                             android:layout_weight="63"
+
+                             android:layout_marginTop="20dp"
+                             android:text="Change Pass DETAILS"
+                             android:layout_width="match_parent"
+                             android:layout_marginEnd="50dp"
+                             android:layout_height="wrap_content"
+                             android:id="@+id/Changepassdetails"
+                             android:layout_marginBottom="28dp"
+                             android:layout_alignParentBottom="true"
+                             android:layout_alignParentStart="true"
+                             android:layout_marginStart="50dp" />
+
+
+                     </LinearLayout>
+
+
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:weightSum="100"
+                         android:layout_height="wrap_content">
+
+                         <Button
+                             android:layout_marginTop="20dp"
+                             android:text="VIEW PASS"
+                             android:layout_weight="70"
+                             android:layout_width="match_parent"
+                             android:layout_marginEnd="50dp"
+
+                             android:layout_height="wrap_content"
+                             android:id="@+id/Viewpass"
+                             android:layout_marginBottom="28dp"
+                             android:layout_alignParentBottom="true"
+                             android:layout_alignParentStart="true"
+                             android:layout_marginStart="50dp" />
+
+
+                     </LinearLayout>
+
+
+
+
+                 </LinearLayout>
+
+
+
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

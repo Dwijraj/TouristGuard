@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="786dp"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130dp">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="0dp"
+                android:id="@+id/SCAN_PROFILE"
+                android:layout_weight="0.17"
+                android:scaleType="centerCrop" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:textColor="#ffff"
+                android:textSize="19sp"
+                android:layout_height="wrap_content"
+                android:text="@string/Name"
+                android:id="@+id/names"/>
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Name goes here"
+                android:textColor="#ffff"
+                android:id="@+id/SCAN_NAME"
+                android:layout_marginLeft="30dp"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:textSize="17sp"
+                android:textColor="#ffff"/>
+
+            <TextView
+                android:layout_marginTop="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:gravity="center"
+                android:textColor="#ffff"
+                android:id="@+id/SCAN_ADDRESS"
+                android:layout_marginLeft="20dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mobile"
+                android:textSize="19sp"
+                android:textColor="#ffff"/>
+
+            <TextView
+                android:layout_marginTop="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mobile"
+                android:gravity="center"
+                android:textColor="#ffff"
+                android:id="@+id/SCAN_MOBILE"
+                android:layout_marginLeft="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID number"
+                android:textSize="17sp"
+                android:textColor="#ffff"/>
+
+            <TextView
+                android:layout_marginTop="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="id_no"
+                android:gravity="center"
+                android:textColor="#ffff"
+                android:id="@+id/SCAN_ID"
+                android:layout_marginLeft="20dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Purpose of visit"
+                android:textSize="15sp"
+                android:textColor="#ffff"/>
+
+            <TextView
+                android:layout_marginTop="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pupose"
+                android:gravity="center"
+                android:textColor="#ffff"
+                android:id="@+id/SCAN_REASON"
+                android:layout_marginLeft="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date of journey"
+                android:textSize="15sp"
+                android:textColor="#ffff"/>
+
+            <TextView
+                android:layout_marginTop="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pupose"
+                android:gravity="center"
+                android:textColor="#ffff"
+                android:id="@+id/SCAN_DOJ"
+                android:layout_marginLeft="20dp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date of birth"
+                android:textSize="15sp"
+                android:textColor="#ffff"/>
+
+            <TextView
+                android:layout_marginTop="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date of birth"
+                android:gravity="center"
+                android:textColor="#ffff"
+                android:id="@+id/SCAN_DOB"
+                android:layout_marginLeft="20dp"/>
+        </LinearLayout>
+
+
+
+
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="260dp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="260dp"
+                android:background="@color/colorPrimary"
+                android:id="@+id/SCAN_PIC"/>
+
+
+        </RelativeLayout>
+
+
+
+        <LinearLayout
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Application status"
+                android:id="@+id/NOT_REQUIRED"
+                android:textSize="19sp"
+                android:textColor="#ffff"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Application status"
+                android:id="@+id/SCAN_STATUS"
+                android:textSize="19sp"
+                android:textColor="#ffff"/>
+        <!--    <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:id="@+id/SCAN_STATUS"
+                android:layout_marginLeft="70dp"
+                android:text="Payment pending"
+                android:textColor="#ffff"
+                android:textSize="16dp"/> -->
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+
+                <Button
+                    android:text="BOOK VEHICLE"
+                    android:enabled="false"
+                    android:id="@+id/vehicle"
+                    android:textColor="#000000"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/Display_Bar_Code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SHOW BAR CODE"/>
+
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>
+
+
+
+</android.support.v7.widget.CardView>
