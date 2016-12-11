@@ -43,40 +43,21 @@ public class ViewPass extends AppCompatActivity {
     private DatabaseReference ApplicationRef2;
     private  Application app;
 
- /*   @Override
-    protected void onStop() {
-        super.onStop();
-        Intent nw= new Intent(ViewPass.this,ApplyPass.class);
-      //  nw.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        finish();
-        startActivity(nw);
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Intent nw= new Intent(ViewPass.this,ApplyPass.class);
-       // nw.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        finish();
-        startActivity(nw);
-
+        Log.d("log","finished");
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Intent nw= new Intent(ViewPass.this,ApplyPass.class);
-       // nw.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        finish();
-        startActivity(nw);
-
-    } */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(Passdetails.THE_TEST==1)
+            finish();
         setContentView(R.layout.pass_history);
 
+      final  ImageView imageView=(ImageView) findViewById(R.id.BAR_CODE_SHOW);
+       final TextView  Pass=(TextView)findViewById(R.id.PassNumber);
         generatebarcode=(Button)findViewById(R.id.Display_Bar_Code);
         Vehicle=(Button)findViewById(R.id.vehicle);
         scan_id2=(ImageView)findViewById(R.id.SCAN_PIC) ;
@@ -142,6 +123,11 @@ public class ViewPass extends AppCompatActivity {
                         .load(app.ApplicantScanId)
                         .into(scan_id2);
 
+                Glide.with(getApplicationContext())
+                        .load(app.Barcode_Image)
+                        .into(imageView);
+
+                Pass.setText(pass);
 
             }
 
@@ -157,24 +143,7 @@ public class ViewPass extends AppCompatActivity {
                 Intent NEW_INTENT=new Intent(ViewPass.this,Barcode_Display.class);
                 NEW_INTENT.putExtra("Barcode_URL",app.Barcode_Image);
                 NEW_INTENT.putExtra("Pass_No",pass);
-
                 startActivity(NEW_INTENT);
-
-
-
-
-               /* final Dialog dialog=new Dialog(ViewPass.this);
-                dialog.setContentView(R.layout.barcode_image);
-                dialog.show();
-                ImageView imageView=(ImageView) dialog.findViewById(R.id.BAR_CODE_SHOW);
-                TextView  Pass=(TextView) dialog.findViewById(R.id.PassNumber);
-
-                Glide.with(ViewPass.this)
-                        .load(app.Barcode_Image)
-                        .into(imageView);
-
-                Pass.setText(pass); */
-
 
             }
         });

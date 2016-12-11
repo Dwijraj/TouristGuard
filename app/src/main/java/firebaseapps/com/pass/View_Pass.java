@@ -82,8 +82,9 @@ public class View_Pass extends AppCompatActivity {
                                         {
                                             Intent view=new Intent(View_Pass.this,ViewPass.class);
                                             view.putExtra("Pass",PASS_NO);
-                                            finish();
+
                                             startActivity(view);
+                                            finish();
                                         }
                                         else
                                         {

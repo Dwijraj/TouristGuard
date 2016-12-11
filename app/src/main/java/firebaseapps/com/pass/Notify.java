@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -38,9 +39,9 @@ public class Notify extends BroadcastReceiver {
         notification.setContentTitle("Pass");
         notification.setContentText(value);
 
-
+        Log.d("log","done");
         Intent intents=new  Intent(context,CheckPassDetails.class);
-        PendingIntent pendingIntent=PendingIntent.getActivity(context,0,intents,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent=PendingIntent.getActivity(context,0,intents,PendingIntent.FLAG_NO_CREATE);
         notification.setContentIntent(pendingIntent);
 
         NotificationManager nm=(NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);

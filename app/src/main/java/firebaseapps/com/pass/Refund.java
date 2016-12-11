@@ -22,6 +22,7 @@ public class Refund extends AppCompatActivity {
     private Button check;
     private  DatabaseReference databaseReferenceRefund;
     private DatabaseReference mDatabaseref;
+    private DatabaseReference MAIN_ROOT;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +32,7 @@ public class Refund extends AppCompatActivity {
         databaseReferenceRefund =FirebaseDatabase.getInstance().getReference().child("RefundRequests");
 
 
+        MAIN_ROOT=FirebaseDatabase.getInstance().getReference();
         mDatabaseref= FirebaseDatabase.getInstance().getReference().child("Applications");  //Reference to applications
         tras_id=(EditText)findViewById(R.id.viewtransactionid);
         View=(TextView)findViewById(R.id.viewstatus);
@@ -75,6 +77,24 @@ public class Refund extends AppCompatActivity {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
 
+                                                        MAIN_ROOT.child("VerifiedUsers").child(pass).removeValue();
+                                                        MAIN_ROOT.child("VehicleBooking").child(pass).removeValue();
+
+                                                       MAIN_ROOT.child("Applications").child(pass).child("Uid").addValueEventListener(new ValueEventListener() {
+                                                           @Override
+                                                           public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                                               String UID=dataSnapshot.getValue(String.class);
+
+                                                               MAIN_ROOT.child("Users").child(UID).child("Applications").child(pass).setValue("Refund requested");
+
+                                                           }
+
+                                                           @Override
+                                                           public void onCancelled(DatabaseError databaseError) {
+
+                                                           }
+                                                       });
                                                         DatabaseReference databaseReferenceRefund =FirebaseDatabase.getInstance().getReference().child("RefundRequests");
 
                                                         databaseReferenceRefund.child(pass).setValue("Checking in progress..").addOnSuccessListener(new OnSuccessListener<Void>() {

@@ -3,10 +3,19 @@ package firebaseapps.com.pass;
 
 //PayPal email dwijrajbhattacharyya@gmail.com
 //Password Maina123
+import android.*;
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -23,12 +32,20 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText Phone;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthlistener;
     private Button buttons;
+    private final int GALLERY_OPEN=90;
+    static final Integer WRITE_EXST = 0x2;
+    private final Integer CAMERA = 0x4;
     private TelephonyManager telephonyManager;                          //TelephonyManager Object to help fetch IMEI of the mobile
      private ProgressDialog prog;
     private DatabaseReference mDatabaseref;
@@ -41,7 +58,15 @@ public class MainActivity extends AppCompatActivity {
         Phone=(EditText)findViewById(R.id.editText3);
         prog=new ProgressDialog(this);
         buttons=(Button)findViewById(R.id.button);
-        mDatabaseref= FirebaseDatabase.getInstance().getReference().child("Users");   //Points to the Users child  of the root parent
+        mDatabaseref= FirebaseDatabase.getInstance().getReference().child("Users");//Points to the Users child  of the root parent
+
+        if(Build.VERSION.SDK_INT>=23)
+        {
+
+            askForPermission(Manifest.permission.READ_EXTERNAL_STORAGE,GALLERY_OPEN);
+
+
+        }
 
        // telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);  //Telephony manager object is initiated
         mAuth=FirebaseAuth.getInstance();                           //Firebase Auth instance
@@ -169,6 +194,45 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            switch (requestCode)
+            {
+                case 90:
+                    askForPermission(android.Manifest.permission.CAMERA,CAMERA);
+                    break;
+
+                case 0x4:
+
+                    break;
+            }
+
+
+    }
+
+
+    private void askForPermission(String permission, Integer requestCode) {
+        if (ContextCompat.checkSelfPermission(MainActivity.this, permission) != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, permission)) {
+
+
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{permission}, requestCode);
+
+            } else {
+
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{permission}, requestCode);
+            }
+        } else {
+
+            Toast.makeText(getApplicationContext(),"Storage and camera permissions are already enabled",Toast.LENGTH_SHORT).show();
+        }
 
 
     }

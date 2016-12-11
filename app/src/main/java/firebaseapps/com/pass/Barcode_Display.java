@@ -9,8 +9,18 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+
+
 public class Barcode_Display extends AppCompatActivity {
 
+
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

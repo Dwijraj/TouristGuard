@@ -10,6 +10,7 @@
     <string name="mobileerror">Enter a valid mobile</string>
     <string name="dateerror">Enter a valid date</string>
     <string name="ageerror">Enter a valid age</string>
+    <string name="err_name">Incorrect characters for name</string>
 
 </resources>
 

@@ -20,11 +20,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
@@ -32,9 +36,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -53,6 +59,7 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.integration.android.IntentIntegrator;
+import com.jakewharton.rxbinding.widget.RxTextView;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
@@ -75,6 +82,9 @@ import java.util.EnumMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+
+import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
 
 public class Passdetails extends AppCompatActivity {
 
@@ -113,10 +123,13 @@ public class Passdetails extends AppCompatActivity {
     private String paymentAmount;
     private String state;
     private int flag;
+    private Spinner spinner;
     private String id;
     public static final int PAYPAL_REQUEST_CODE = 123;
-
+    private AwesomeValidation mAwesomeValidation;
+    public static int THE_TEST=0;
     private DatePicker datePicker;
+    private static  final String[]paths = {"Passport", "Driving License", "Adhar Card","PAN"};
     private Calendar calendar;
     private int mDay, mMonth ,mYear;
     //Paypal Configuration Object
@@ -132,16 +145,16 @@ public class Passdetails extends AppCompatActivity {
             .merchantUserAgreementUri(
                     Uri.parse("https://www.example.com/legal"));
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Transaction_Id.setText("Please copy the transaction id after payment keep it safe to query about your application later");
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passdetails);
+        THE_TEST=1;
+        mAwesomeValidation = new AwesomeValidation(BASIC);
+
+
+
 
         DOBDate=(ImageButton)findViewById(R.id.DOBDate);
         DOJDate=(ImageButton)findViewById(R.id.DOJDate);
@@ -169,7 +182,71 @@ public class Passdetails extends AppCompatActivity {
         ApplicationRef= FirebaseDatabase.getInstance().getReference().child("Applications");//Points to the root directory of the Database
         User_app_ref=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         ApplicationStorageRef= FirebaseStorage.getInstance().getReference();        //Points to the root directory of the Storage
+        spinner = (Spinner)findViewById(R.id.spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Passdetails.this,
+                android.R.layout.simple_spinner_item,paths);
 
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+
+
+
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                switch (position) {
+                    case 0:
+                        // Whatever you want to happen when the first item gets selected
+                        break;
+                    case 1:
+                        // Whatever you want to happen when the second item gets selected
+                        break;
+                    case 2:
+                        // Whatever you want to happen when the thrid item gets selected
+                        break;
+
+                }
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
+        //adding validation to edittexts
+        mAwesomeValidation.addValidation(Passdetails.this, R.id.name,  "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.err_name);
+
+
+        Name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (mAwesomeValidation.validate())
+                {
+
+                }
+
+            }
+        });
 
       /*  try {
             bitmap_BAR_CODE = encodeAsBitmap("PAY-2RW02143UH910782FK7WXORI", BarcodeFormat.CODE_128, 600, 300);
@@ -189,6 +266,9 @@ public class Passdetails extends AppCompatActivity {
                 // To show current date in the datepicker
                 final Calendar mcurrentDate = Calendar.getInstance();
 
+                final Calendar  m_three_months = Calendar.getInstance();
+
+                m_three_months.add(Calendar.MONTH,2);
                 mcurrentDate.add(Calendar.DAY_OF_MONTH,5);
                  mYear  = mcurrentDate.get(Calendar.YEAR);
                   mMonth = mcurrentDate.get(Calendar.MONTH);
@@ -242,6 +322,7 @@ public class Passdetails extends AppCompatActivity {
                     }
                 }, mYear, mMonth, mDay);
                 mDatePicker.getDatePicker().setMinDate(mcurrentDate.getTimeInMillis());
+                mDatePicker.getDatePicker().setMaxDate(m_three_months.getTimeInMillis());
                // mDatePicker.setTitle("Select date");
                 mDatePicker.show();
             }
@@ -290,19 +371,9 @@ public class Passdetails extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                flag=1;
 
-                if(Build.VERSION.SDK_INT>=23)
-                {
-                    askForPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE,WRITE_EXST);
-                }
-
-                /*will allow the user to select from gallery*/
-            else
-                {
                     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(cameraIntent, PROFILE_PHOTO);
-                }
 
 
             }
@@ -312,21 +383,12 @@ public class Passdetails extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                flag=2;
 
-                if(Build.VERSION.SDK_INT>=23)
-                {
-                    askForPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE,WRITE_EXST);
-                }
-                else
-                {
 
                     Intent intent=new Intent(Intent.ACTION_PICK);
                     intent.setType("image/*");
                     startActivityForResult(intent,SCAN_ID);
 
-                }
-                /*will allow the user to select from gallery*/
 
             }
         });
@@ -334,24 +396,32 @@ public class Passdetails extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                final String Names=Name.getText().toString().trim();
-                final String Addresses= Address.getText().toString().trim();
-                final String Mobiles= Mobile.getText().toString().trim();
-                final String ID_NO= ID_No.getText().toString().trim();
-                final String Purposes= Purpose.getText().toString().trim();
-                final String DateOfBirth=Dateofbirth.getText().toString().trim();
-                final String DateOfJourney=Dateofjourney.getText().toString().trim();
+                final String Names = Name.getText().toString().trim();
+                final String Addresses = Address.getText().toString().trim();
+                final String Mobiles = Mobile.getText().toString().trim();
+                final String ID_NO = ID_No.getText().toString().trim();
+                final String Purposes = Purpose.getText().toString().trim();
+                final String DateOfBirth = Dateofbirth.getText().toString().trim();
+                final String DateOfJourney = Dateofjourney.getText().toString().trim();
 
-                Log.v("Mainas3",DateOfJourney);
-               // SubmitApplication();
-                if(!(TextUtils.isEmpty(Names) || TextUtils.isEmpty(Addresses) || TextUtils.isEmpty(DateOfJourney) || TextUtils.isEmpty(DateOfBirth) || TextUtils.isEmpty(Mobiles) || TextUtils.isEmpty(ID_NO) || TextUtils.isEmpty(Purposes) || TextUtils.isEmpty(byteArray.toString()) || TextUtils.isEmpty(scaniduri.toString()) ) )
+
+                if (byteArray == null) {
+                    Toast.makeText(getApplicationContext(), "Please click a photo of yours", Toast.LENGTH_SHORT).show();
+
+
+                } else
                 {
-                    UNAVAILABLE_DATES.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    if(mAwesomeValidation.validate())
+                    {
+                        if(!(TextUtils.isEmpty(Names) || TextUtils.isEmpty(Addresses) || TextUtils.isEmpty(DateOfJourney) || TextUtils.isEmpty(DateOfBirth) || TextUtils.isEmpty(Mobiles) || TextUtils.isEmpty(ID_NO) || TextUtils.isEmpty(Purposes) || TextUtils.isEmpty(byteArray.toString()) || TextUtils.isEmpty(scaniduri.toString()) ) )
+                        {
+                            UNAVAILABLE_DATES.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                            Log.v("Mainas5",dataSnapshot.toString());
+                                    Log.v("Mainas5",dataSnapshot.toString());
 
 
                                     if(dataSnapshot.hasChild(DateOfJourney))
@@ -363,24 +433,33 @@ public class Passdetails extends AppCompatActivity {
                                         getPayment();
                                     }
 
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
 
-                        }
-                    });
+                                }
+                            });
 
-                   // getPayment();
+                            // getPayment();
+                        }
+                        else
+                        {
+                            Toast.makeText(getApplicationContext(),"Please fill the empty fields and upload your profile photo and Scan_id",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+
                 }
-                else
-                {
-                    Toast.makeText(getApplicationContext(),"Please fill the empty fields and upload your profile photo and Scan_id",Toast.LENGTH_SHORT).show();
-                }
+
+                Log.v("Mainas3",DateOfJourney);
+               // SubmitApplication();
+
             }
         });
     }
     public void onDestroy() {
         stopService(new Intent(this, PayPalService.class));
+        THE_TEST=0;
         super.onDestroy();
     }
     Bitmap encodeAsBitmap(String contents, BarcodeFormat format, int img_width, int img_height) throws WriterException {
@@ -680,74 +759,5 @@ public class Passdetails extends AppCompatActivity {
         }
 
     }
-    private void askForPermission(String permission, Integer requestCode) {
-        if (ContextCompat.checkSelfPermission(Passdetails.this, permission) != PackageManager.PERMISSION_GRANTED) {
 
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(Passdetails.this, permission)) {
-
-                //This is called if user has denied the permission before
-                //In this case I am just asking the permission again
-                ActivityCompat.requestPermissions(Passdetails.this, new String[]{permission}, requestCode);
-
-            } else {
-
-                ActivityCompat.requestPermissions(Passdetails.this, new String[]{permission}, requestCode);
-            }
-        }
-        else {
-
-            if(flag==1)
-            {
-                Intent intent=new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent,PROFILE_PHOTO);
-            }
-            else
-            {
-                Intent intent=new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent,SCAN_ID);
-            }
-
-        }
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if(requestCode==WRITE_EXST)
-        {
-
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                // permission was granted, yay! Do the
-                // contacts-related task you need to do.
-                if(flag==1)
-                {
-                    Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                    photoPickerIntent.setType("image/*");
-                    startActivityForResult(photoPickerIntent,PROFILE_PHOTO );
-                }
-
-                else
-                {
-                    Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                    photoPickerIntent.setType("image/*");
-                    startActivityForResult(photoPickerIntent,SCAN_ID );
-                }
-
-            } else {
-
-                Toast.makeText(getApplicationContext(),"Permission denied",Toast.LENGTH_SHORT).show();
-                // permission denied, boo! Disable the
-                // functionality that depends on this permission.
-            }
-            return;
-
-        }
-
-
-    }
 }

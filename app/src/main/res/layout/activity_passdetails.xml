@@ -99,6 +99,7 @@
 
             <LinearLayout
                 android:layout_marginTop="40dp"
+                android:id="@+id/BeforeSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -139,6 +140,24 @@
                     android:id="@+id/id_no"
                     android:background="#ffff" />
             </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:tag="Select the Id "
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_marginTop="40dp"
