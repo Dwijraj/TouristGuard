@@ -2,6 +2,7 @@ package firebaseapps.com.pass;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -58,15 +59,11 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.jakewharton.rxbinding.widget.RxTextView;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -83,6 +80,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+
+import mohitbadwal.rxconnect.RxConnect;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
 
@@ -107,6 +106,7 @@ public class Passdetails extends AppCompatActivity {
     private EditText ID_No;
     private EditText Purpose;
     private TextView Scan_id;
+    private Dialog dialog;
     private Button   Payment;
     private ImageView Profile;
     private ImageButton DOBDate;
@@ -119,9 +119,11 @@ public class Passdetails extends AppCompatActivity {
     private DatabaseReference User_app_ref;
     private DatabaseReference UNAVAILABLE_DATES;
     private StorageReference ApplicationStorageRef;
+    private RxConnect rxConnect;
     //For PayPal Parts
     private String paymentAmount;
     private String state;
+    private String ID_Source;
     private int flag;
     private Spinner spinner;
     private String id;
@@ -129,7 +131,7 @@ public class Passdetails extends AppCompatActivity {
     private AwesomeValidation mAwesomeValidation;
     public static int THE_TEST=0;
     private DatePicker datePicker;
-    private static  final String[]paths = {"Passport", "Driving License", "Adhar Card","PAN"};
+    private static  final String[]paths = {"Tap to select ID proof source","Passport", "Driving License", "Adhar Card","PAN"};
     private Calendar calendar;
     private int mDay, mMonth ,mYear;
     //Paypal Configuration Object
@@ -154,8 +156,10 @@ public class Passdetails extends AppCompatActivity {
         mAwesomeValidation = new AwesomeValidation(BASIC);
 
 
+     //   dialog=new Dialog(Passdetails.this);
 
-
+        rxConnect=new RxConnect(Passdetails.this);
+        ID_Source="Tap to select ID proof source";
         DOBDate=(ImageButton)findViewById(R.id.DOBDate);
         DOJDate=(ImageButton)findViewById(R.id.DOJDate);
         calendar = Calendar.getInstance();
@@ -183,33 +187,20 @@ public class Passdetails extends AppCompatActivity {
         User_app_ref=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         ApplicationStorageRef= FirebaseStorage.getInstance().getReference();        //Points to the root directory of the Storage
         spinner = (Spinner)findViewById(R.id.spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Passdetails.this,
+       /* ArrayAdapter<String> adapter = new ArrayAdapter<String>(Passdetails.this,
                 android.R.layout.simple_spinner_item,paths);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-
-
+        spinner.setAdapter(adapter); */
+        CustomAdapter customAdapter=new CustomAdapter(getApplicationContext(),paths);
+        spinner.setAdapter(customAdapter);
 
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                switch (position) {
-                    case 0:
-                        // Whatever you want to happen when the first item gets selected
-                        break;
-                    case 1:
-                        // Whatever you want to happen when the second item gets selected
-                        break;
-                    case 2:
-                        // Whatever you want to happen when the thrid item gets selected
-                        break;
-
-                }
-
+                ID_Source=paths[position];
 
             }
 
@@ -218,11 +209,7 @@ public class Passdetails extends AppCompatActivity {
 
             }
         });
-
-
-
-
-        //adding validation to edittexts
+       //adding validation to edittexts
         mAwesomeValidation.addValidation(Passdetails.this, R.id.name,  "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.err_name);
 
 
@@ -247,17 +234,6 @@ public class Passdetails extends AppCompatActivity {
 
             }
         });
-
-      /*  try {
-            bitmap_BAR_CODE = encodeAsBitmap("PAY-2RW02143UH910782FK7WXORI", BarcodeFormat.CODE_128, 600, 300);
-
-            Profile.setImageBitmap(bitmap_BAR_CODE);
-        } catch (WriterException e) {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(),"barcode can't be generated",Toast.LENGTH_SHORT).show();
-        } */
-
-
         DOJDate.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -414,7 +390,7 @@ public class Passdetails extends AppCompatActivity {
 
                     if(mAwesomeValidation.validate())
                     {
-                        if(!(TextUtils.isEmpty(Names) || TextUtils.isEmpty(Addresses) || TextUtils.isEmpty(DateOfJourney) || TextUtils.isEmpty(DateOfBirth) || TextUtils.isEmpty(Mobiles) || TextUtils.isEmpty(ID_NO) || TextUtils.isEmpty(Purposes) || TextUtils.isEmpty(byteArray.toString()) || TextUtils.isEmpty(scaniduri.toString()) ) )
+                        if(  !( ID_Source.equals("Tap to select ID proof source") ||  TextUtils.isEmpty(Names) || TextUtils.isEmpty(Addresses) || TextUtils.isEmpty(DateOfJourney) || TextUtils.isEmpty(DateOfBirth) || TextUtils.isEmpty(Mobiles) || TextUtils.isEmpty(ID_NO) || TextUtils.isEmpty(Purposes) || TextUtils.isEmpty(byteArray.toString()) || TextUtils.isEmpty(scaniduri.toString()) ) )
                         {
                             UNAVAILABLE_DATES.addValueEventListener(new ValueEventListener() {
                                 @Override
@@ -597,6 +573,7 @@ public class Passdetails extends AppCompatActivity {
                                     newapplication.child("ApplicationStatus").setValue("Payment Received");
                                     newapplication.child("DateOfBirth").setValue(DateOfBirth);
                                     newapplication.child("DateOfJourney").setValue(DateOfJourney);
+                                    newapplication.child("ID_Source").setValue(ID_Source);
 
 
                                     Application_status.setText("Payment state :"+"Payment Received processing"+"\n" +"Transaction Id \n" +id);
@@ -619,6 +596,10 @@ public class Passdetails extends AppCompatActivity {
                                     Payment.setEnabled(false);
                                     Transaction_Id.setText(id);
                                     Transaction_Id.setEnabled(true);
+
+
+
+
 
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
@@ -717,27 +698,16 @@ public class Passdetails extends AppCompatActivity {
                                            "intent": "sale"
                                         }
                          */
-
-
-
                         JSONObject object=confirm.toJSONObject();
                         JSONObject response=object.getJSONObject("response");
                         state=response.getString("state");
                         id=response.getString("id");
-
-
-
-                        // bitmap_BAR_CODE = encodeAsBitmap(id, BarcodeFormat.CODE_128, 600, 300);  -->Originally
-                        bitmap_BAR_CODE = encodeAsBitmap(id, BarcodeFormat.CODE_128, 1000, 300);
+               // bitmap_BAR_CODE = encodeAsBitmap(id, BarcodeFormat.CODE_128, 600, 300);  -->Originally
+                        bitmap_BAR_CODE = encodeAsBitmap(id, BarcodeFormat.CODE_128, 1400, 400);
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
                         bitmap_BAR_CODE.compress(Bitmap.CompressFormat.PNG, 100, stream);
                         BARCODE_BYTE_ARRAY = stream.toByteArray();
-
-
-
-
-
-                        Log.v("Here",state);
+                      Log.v("Here",state);
 
                         if(state.equals("approved"))
                         {

@@ -30,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ApplyPass extends AppCompatActivity {
 
+    private final int SPLASH_DISPLAY_LENGTH = 1000;
     private DatabaseReference mDatabaseref;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthlistener;
@@ -91,13 +92,17 @@ public class ApplyPass extends AppCompatActivity {
             }
         };
 
-        Loginasadmin.setOnClickListener(new View.OnClickListener() {
+
+
+
+
+     /*   Loginasadmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent login_admin=new Intent(ApplyPass.this,Adminlogin.class);     //Login as admin
                 startActivity(login_admin);
             }
-        });
+        }); */
 
         applypass.setOnClickListener(new View.OnClickListener() {
             @Override

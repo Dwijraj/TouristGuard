@@ -21,7 +21,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.squareup.picasso.Picasso;
 
 public class ViewPass extends AppCompatActivity {
 
@@ -42,6 +41,7 @@ public class ViewPass extends AppCompatActivity {
     private TextView Application_status2;
     private DatabaseReference ApplicationRef2;
     private  Application app;
+    private TextView ID_source;
 
     @Override
     protected void onDestroy() {
@@ -68,6 +68,7 @@ public class ViewPass extends AppCompatActivity {
         Dateofbirth2=(TextView)findViewById(R.id.SCAN_DOB);
         Dateofjourney2=(TextView)findViewById(R.id.SCAN_DOJ);
         Purpose2=(TextView)findViewById(R.id.SCAN_REASON);
+        ID_source=(TextView)findViewById(R.id.ID_Source_field);
         Profile2=(ImageView)findViewById(R.id.SCAN_PROFILE);
         Application_status2=(TextView)findViewById(R.id.SCAN_STATUS);
         ApplicationRef2= FirebaseDatabase.getInstance().getReference().child("Applications");//Points to the root directory of the Database
@@ -104,6 +105,7 @@ public class ViewPass extends AppCompatActivity {
                 Dateofjourney2.setText(app.DateOfJourney);
                 Purpose2.setText(app.Purpose);
                 Application_status2.setText(app.ApplicationStatus.toUpperCase());
+                ID_source.setText(app.ID_Source);
 
                 if(app.ApplicationStatus.contains("Verified"))
                 {

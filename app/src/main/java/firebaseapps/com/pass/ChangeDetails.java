@@ -48,8 +48,10 @@ public class ChangeDetails extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Button update;
     private DatabaseReference mDatabaseref;
+    private DatabaseReference  UNAVAILABLE_DATES;
     private DatabaseReference databasereferenceforchange;
     private String passno;
+    private String state;
     private int mDay, mMonth ,mYear;
     public static final int PAYPAL_REQUEST_CODE = 123;
     private Intent intent;
@@ -72,6 +74,10 @@ public class ChangeDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_details);
 
+        state="Payment_Pending";
+        Passdetails.THE_TEST=1;
+        UNAVAILABLE_DATES=FirebaseDatabase.getInstance().getReference().child("UnavailableDates");
+        UNAVAILABLE_DATES.keepSynced(true);
 
         mAuth=FirebaseAuth.getInstance();
         img_button=(ImageButton)findViewById(R.id.image_Button);
@@ -87,18 +93,6 @@ public class ChangeDetails extends AppCompatActivity {
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
 
         startService(intent);
-
-
-
-
-
-
-
-
-
-
-
-
         img_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,7 +175,35 @@ public class ChangeDetails extends AppCompatActivity {
                                                         String myFormat = "dd-MM-yyyy"; //Change as you need
                                                         final SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
 
-                                                        DOJ.setText(sdf.format(myCalendar.getTime()));
+                                                        UNAVAILABLE_DATES.addValueEventListener(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                                                                Log.v("Mainas5",dataSnapshot.toString());
+
+
+                                                                if(dataSnapshot.hasChild(sdf.format(myCalendar.getTime())))
+                                                                {
+                                                                    Toast.makeText(getApplicationContext(),"Selected date is unavailable",Toast.LENGTH_SHORT).show();
+                                                                }
+                                                                else
+                                                                {
+                                                                    DOJ.setText(sdf.format(myCalendar.getTime()));
+                                                                }
+
+                                                            }
+                                                            @Override
+                                                            public void onCancelled(DatabaseError databaseError) {
+
+                                                            }
+                                                        });
+
+
+
+
+
+                                                       // DOJ.setText(sdf.format(myCalendar.getTime()));
 
 
 
@@ -194,7 +216,15 @@ public class ChangeDetails extends AppCompatActivity {
                                                 mDatePicker.getDatePicker().setMinDate(mcurrentDate.getTimeInMillis());
                                                 mDatePicker.getDatePicker().setMaxDate(m_three_months.getTimeInMillis());
                                                 // mDatePicker.setTitle("Select date");
-                                                mDatePicker.show();
+                                                if(state.equals("approved"))
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    mDatePicker.show();
+                                                }
+                                               // mDatePicker.show();
 
                                             }
                                             else
@@ -304,16 +334,20 @@ public class ChangeDetails extends AppCompatActivity {
 
                                     String id_nos=dataSnapshot.getValue(String.class);
 
-                                    if(id_nos.equals(id_no))
+                                    if(id_nos.equals(id_no)&&(!DOJ.getText().toString().isEmpty()))
                                     {
                                         if(N==1) {
                                             getPayments();
                                             N=99;
                                         }
                                     }
-                                    else
-                                    {
-                                        Toast.makeText(getApplicationContext(),"Wrong Id no",Toast.LENGTH_LONG).show();
+                                    else {
+                                        if (DOJ.getText().toString().isEmpty()) {
+                                            Toast.makeText(getApplicationContext(), "Select a proper Date", Toast.LENGTH_LONG).show();
+
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "Wrong Id no", Toast.LENGTH_LONG).show();
+                                        }
                                     }
                                 }
 
@@ -379,7 +413,7 @@ public class ChangeDetails extends AppCompatActivity {
 
                         JSONObject object=confirm.toJSONObject();
                         JSONObject response=object.getJSONObject("response");
-                        String state=response.getString("state");
+                        state=response.getString("state");
 
                         Log.v("Here",state);
 

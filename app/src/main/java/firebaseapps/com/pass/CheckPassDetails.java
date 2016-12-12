@@ -70,6 +70,9 @@ public class CheckPassDetails extends AppCompatActivity {
                         {
                             //When application is not present
                             m2Dialog.dismiss();
+                            app_status.setText("Application status");
+
+                            app_status.append(" :"+"APPLICATION NOT FOUND");
                             Toast.makeText(getApplicationContext(),"no such application found",Toast.LENGTH_LONG).show();
                         }
                     }

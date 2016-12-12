@@ -17,11 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ApplyPass">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".Passdetails" />
@@ -49,12 +45,17 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ViewPass"
-                 />
+        <activity android:name=".ViewPass" />
         <activity android:name=".View_Pass" />
         <activity android:name=".Vehicles" />
         <activity android:name=".Refund" />
-        <activity android:name=".Barcode_Display"></activity>
+        <activity android:name=".Barcode_Display" />
+        <activity android:name=".Startup">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
