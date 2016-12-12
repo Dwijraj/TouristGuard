@@ -41,8 +41,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.Request;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -68,9 +74,16 @@ import com.paypal.android.sdk.payments.PaymentConfirmation;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -84,6 +97,8 @@ import java.util.concurrent.TimeUnit;
 import mohitbadwal.rxconnect.RxConnect;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
+
+//http://mobicomm.dove-sms.com/mobicomm//submitsms.jsp?user=SACHIN&key=d4c5c9993fXX&mobile=91(9437510178)&message=(test sms)&senderid=INFOSM&accusage=1
 
 public class Passdetails extends AppCompatActivity {
 
@@ -110,6 +125,7 @@ public class Passdetails extends AppCompatActivity {
     private Button   Payment;
     private ImageView Profile;
     private ImageButton DOBDate;
+    private String Mobiles;
     private ImageButton DOJDate;
     private byte[] BARCODE_BYTE_ARRAY;
     private static final int WHITE = 0xFFFFFFFF;
@@ -130,6 +146,7 @@ public class Passdetails extends AppCompatActivity {
     public static final int PAYPAL_REQUEST_CODE = 123;
     private AwesomeValidation mAwesomeValidation;
     public static int THE_TEST=0;
+    String URL="http://mobicomm.dove-sms.com/mobicomm/submitsms.jsp";//?user=SACHIN&key=d4c5c9993fXX&mobile=918093679890&message=(test sms)&senderid=INFOSM&accusage=1";
     private DatePicker datePicker;
     private static  final String[]paths = {"Tap to select ID proof source","Passport", "Driving License", "Adhar Card","PAN"};
     private Calendar calendar;
@@ -147,7 +164,6 @@ public class Passdetails extends AppCompatActivity {
             .merchantUserAgreementUri(
                     Uri.parse("https://www.example.com/legal"));
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,9 +172,54 @@ public class Passdetails extends AppCompatActivity {
         mAwesomeValidation = new AwesomeValidation(BASIC);
 
 
-     //   dialog=new Dialog(Passdetails.this);
+
+
+        dialog=new Dialog(Passdetails.this);
 
         rxConnect=new RxConnect(Passdetails.this);
+        rxConnect.setCachingEnabled(false);
+
+       /* rxConnect.setParam("user","SACHIN");
+        rxConnect.setParam("key","d4c5c9993fXX");
+        rxConnect.setParam("mobile","918093679890");
+        rxConnect.setParam("message","SMS Sent");
+        rxConnect.setParam("senderid","INFOSM");
+        rxConnect.setParam("accusage","1");
+          rxConnect.execute(URL,RxConnect.GET, new RxConnect.RxResultHelper() {
+                                        @Override
+                                        public void onResult(String result) {
+                                            //do something on result
+
+                                            Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
+                                            Log.v("maina123",result+"Hello");
+                                        }
+
+                                        @Override
+                                        public void onNoResult() {
+                                            //do something
+
+                                            Toast.makeText(getApplicationContext(),"Posted no Result",Toast.LENGTH_SHORT).show();
+
+
+                                        }
+
+                                        @Override
+                                        public void onError(Throwable throwable) {
+                                            //do somenthing on error
+
+                                            Toast.makeText(getApplicationContext(),throwable.getMessage(),Toast.LENGTH_SHORT).show();
+
+                                        //    Log.v("Posted",throwable.getMessage().toString()+"---Error");
+                                        }
+
+                                    }); */
+
+
+
+
+
+
+
         ID_Source="Tap to select ID proof source";
         DOBDate=(ImageButton)findViewById(R.id.DOBDate);
         DOJDate=(ImageButton)findViewById(R.id.DOJDate);
@@ -211,6 +272,16 @@ public class Passdetails extends AppCompatActivity {
         });
        //adding validation to edittexts
         mAwesomeValidation.addValidation(Passdetails.this, R.id.name,  "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.err_name);
+
+
+       // String URL=
+//"http://mobicomm.dove-sms.com/mobicomm//submitsms.jsp?user=SACHIN&key=d4c5c9993fXX&mobile=91"+(9437510178)+"&message=(test sms)&senderid=INFOSM&accusage=1";
+
+
+
+
+
+
 
 
         Name.addTextChangedListener(new TextWatcher() {
@@ -374,7 +445,7 @@ public class Passdetails extends AppCompatActivity {
 
                 final String Names = Name.getText().toString().trim();
                 final String Addresses = Address.getText().toString().trim();
-                final String Mobiles = Mobile.getText().toString().trim();
+                Mobiles = Mobile.getText().toString().trim();
                 final String ID_NO = ID_No.getText().toString().trim();
                 final String Purposes = Purpose.getText().toString().trim();
                 final String DateOfBirth = Dateofbirth.getText().toString().trim();
@@ -522,7 +593,7 @@ public class Passdetails extends AppCompatActivity {
 
         final String Names=Name.getText().toString().trim();
         final String Addresses= Address.getText().toString().trim();
-        final String Mobiles= Mobile.getText().toString().trim();
+        Mobiles= Mobile.getText().toString().trim();
         final String ID_NO= ID_No.getText().toString().trim();
         final String Purposes= Purpose.getText().toString().trim();
         final String DateOfBirth=Dateofbirth.getText().toString().trim();
@@ -583,13 +654,33 @@ public class Passdetails extends AppCompatActivity {
 
                                     mDialog.dismiss();
 
-                                    Intent notify = new Intent();
+                                 //    String URL=
+//"http://mobicomm.dove-sms.com/mobicomm//submitsms.jsp?user=SACHIN&key=d4c5c9993fXX&mobile=91"+Mobiles+"&message=Pass submitted pass "+id+"please keep it safe)&senderid=INFOSM&accusage=1";
 
-                                    notify.putExtra("Values", "Form submitted pass_no "+id);
+                                    String URL="http://mobicomm.dove-sms.com/mobicomm//submitsms.jsp?user=SACHIN&key=d4c5c9993fXX&mobile=918093679890&message=(test sms)&senderid=INFOSM&accusage=1";
 
-                                    notify.setAction("Pas_with_some_value_has_changed");
-                                    Log.v("Maina", "start6");
-                                    sendBroadcast(notify);
+
+
+                                    new Thread(new Runnable() {
+                                        @Override
+                                        public void run() {
+
+                                            Intent notify = new Intent();
+
+                                            notify.putExtra("Values", "Form submitted pass_no "+id);
+
+                                            notify.setAction("Pas_with_some_value_has_changed");
+                                            Log.v("Maina", "start6");
+                                            sendBroadcast(notify);
+
+
+                                        }
+                                    }).start();
+
+
+
+
+
                                     Log.v("Maina", "start5");
                                     Log.v("Maina", "start7");
 
@@ -627,6 +718,44 @@ public class Passdetails extends AppCompatActivity {
 
                 }
             });
+
+
+
+        rxConnect.setParam("user","SACHIN");
+        rxConnect.setParam("key","d4c5c9993fXX");
+        rxConnect.setParam("mobile","91"+Mobiles);
+        rxConnect.setParam("message","Pass Booked pass number "+id);
+        rxConnect.setParam("senderid","INFOSM");
+        rxConnect.setParam("accusage","1");
+        rxConnect.execute(URL,RxConnect.GET, new RxConnect.RxResultHelper() {
+            @Override
+            public void onResult(String result) {
+                //do something on result
+
+                Toast.makeText(getApplicationContext(),"Please check sms",Toast.LENGTH_SHORT).show();
+                Log.v("maina123",result+"Hello");
+            }
+
+            @Override
+            public void onNoResult() {
+                //do something
+
+                Toast.makeText(getApplicationContext(),"Posted no Result",Toast.LENGTH_SHORT).show();
+
+
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                //do somenthing on error
+
+                Toast.makeText(getApplicationContext(),throwable.getMessage(),Toast.LENGTH_SHORT).show();
+
+                //    Log.v("Posted",throwable.getMessage().toString()+"---Error");
+            }
+
+        });
+
 
     }
 
