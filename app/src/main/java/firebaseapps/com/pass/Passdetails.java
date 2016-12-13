@@ -146,6 +146,7 @@ public class Passdetails extends AppCompatActivity {
     public static final int PAYPAL_REQUEST_CODE = 123;
     private AwesomeValidation mAwesomeValidation;
     public static int THE_TEST=0;
+    private String MOBILE_NUMBER;
     String URL="http://mobicomm.dove-sms.com/mobicomm/submitsms.jsp";//?user=SACHIN&key=d4c5c9993fXX&mobile=918093679890&message=(test sms)&senderid=INFOSM&accusage=1";
     private DatePicker datePicker;
     private static  final String[]paths = {"Tap to select ID proof source","Passport", "Driving License", "Adhar Card","PAN"};
@@ -723,7 +724,7 @@ public class Passdetails extends AppCompatActivity {
 
         rxConnect.setParam("user","SACHIN");
         rxConnect.setParam("key","d4c5c9993fXX");
-        rxConnect.setParam("mobile","91"+Mobiles);
+        rxConnect.setParam("mobile","91"+Mobile.getText().toString().trim());
         rxConnect.setParam("message","Pass Booked pass number "+id);
         rxConnect.setParam("senderid","INFOSM");
         rxConnect.setParam("accusage","1");
@@ -732,7 +733,7 @@ public class Passdetails extends AppCompatActivity {
             public void onResult(String result) {
                 //do something on result
 
-                Toast.makeText(getApplicationContext(),"Please check sms",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
                 Log.v("maina123",result+"Hello");
             }
 
