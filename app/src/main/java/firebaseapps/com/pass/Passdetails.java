@@ -147,7 +147,7 @@ public class Passdetails extends AppCompatActivity {
     private AwesomeValidation mAwesomeValidation;
     public static int THE_TEST=0;
     private String MOBILE_NUMBER;
-    String URL="http://mobicomm.dove-sms.com/mobicomm/submitsms.jsp";//?user=SACHIN&key=d4c5c9993fXX&mobile=918093679890&message=(test sms)&senderid=INFOSM&accusage=1";
+    String URL="YOUR_URL";//?user=SACHIN&key=d4c5c9993fXX&mobile=918093679890&message=(test sms)&senderid=INFOSM&accusage=1";
     private DatePicker datePicker;
     private static  final String[]paths = {"Tap to select ID proof source","Passport", "Driving License", "Adhar Card","PAN"};
     private Calendar calendar;
