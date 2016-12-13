@@ -60,13 +60,6 @@ public class MainActivity extends AppCompatActivity {
         buttons=(Button)findViewById(R.id.button);
         mDatabaseref= FirebaseDatabase.getInstance().getReference().child("Users");//Points to the Users child  of the root parent
 
-        if(Build.VERSION.SDK_INT>=23)
-        {
-
-            askForPermission(Manifest.permission.READ_EXTERNAL_STORAGE,GALLERY_OPEN);
-
-
-        }
 
        // telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);  //Telephony manager object is initiated
         mAuth=FirebaseAuth.getInstance();                           //Firebase Auth instance
@@ -86,6 +79,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         };
+
+        if(Build.VERSION.SDK_INT>=23)
+        {
+
+            askForPermission(Manifest.permission.READ_EXTERNAL_STORAGE,GALLERY_OPEN);
+
+
+        }
+
 
 
         buttons.setOnClickListener(new View.OnClickListener() {
@@ -231,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
 
-            Toast.makeText(getApplicationContext(),"Storage and camera permissions are already enabled",Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getApplicationContext(),"Storage and camera permissions are already enabled",Toast.LENGTH_SHORT).show();
         }
 
 
