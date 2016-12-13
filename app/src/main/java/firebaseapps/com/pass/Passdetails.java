@@ -124,6 +124,7 @@ public class Passdetails extends AppCompatActivity {
     private Dialog dialog;
     private Button   Payment;
     private ImageView Profile;
+    private ImageView Help;
     private ImageButton DOBDate;
     private String Mobiles;
     private ImageButton DOJDate;
@@ -179,48 +180,7 @@ public class Passdetails extends AppCompatActivity {
 
         rxConnect=new RxConnect(Passdetails.this);
         rxConnect.setCachingEnabled(false);
-
-       /* rxConnect.setParam("user","SACHIN");
-        rxConnect.setParam("key","d4c5c9993fXX");
-        rxConnect.setParam("mobile","918093679890");
-        rxConnect.setParam("message","SMS Sent");
-        rxConnect.setParam("senderid","INFOSM");
-        rxConnect.setParam("accusage","1");
-          rxConnect.execute(URL,RxConnect.GET, new RxConnect.RxResultHelper() {
-                                        @Override
-                                        public void onResult(String result) {
-                                            //do something on result
-
-                                            Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
-                                            Log.v("maina123",result+"Hello");
-                                        }
-
-                                        @Override
-                                        public void onNoResult() {
-                                            //do something
-
-                                            Toast.makeText(getApplicationContext(),"Posted no Result",Toast.LENGTH_SHORT).show();
-
-
-                                        }
-
-                                        @Override
-                                        public void onError(Throwable throwable) {
-                                            //do somenthing on error
-
-                                            Toast.makeText(getApplicationContext(),throwable.getMessage(),Toast.LENGTH_SHORT).show();
-
-                                        //    Log.v("Posted",throwable.getMessage().toString()+"---Error");
-                                        }
-
-                                    }); */
-
-
-
-
-
-
-
+        Help=(ImageView)findViewById(R.id.HELP);
         ID_Source="Tap to select ID proof source";
         DOBDate=(ImageButton)findViewById(R.id.DOBDate);
         DOJDate=(ImageButton)findViewById(R.id.DOJDate);
@@ -275,11 +235,14 @@ public class Passdetails extends AppCompatActivity {
         mAwesomeValidation.addValidation(Passdetails.this, R.id.name,  "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.err_name);
 
 
-       // String URL=
-//"http://mobicomm.dove-sms.com/mobicomm//submitsms.jsp?user=SACHIN&key=d4c5c9993fXX&mobile=91"+(9437510178)+"&message=(test sms)&senderid=INFOSM&accusage=1";
+      Help.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
 
+              startActivity(new Intent(Passdetails.this,HelpActivity.class));
 
-
+          }
+      });
 
 
 
