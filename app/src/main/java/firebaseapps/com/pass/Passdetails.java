@@ -4,39 +4,29 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
+
 import android.content.Intent;
-import android.content.pm.PackageManager;
+
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
+
 import android.net.Uri;
-import android.os.Build;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.provider.Telephony;
+
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.SmsManager;
+
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,25 +59,18 @@ import com.paypal.android.sdk.payments.PaymentConfirmation;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
+
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
 import java.math.BigDecimal;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+
 import java.util.EnumMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
+
 
 import mohitbadwal.rxconnect.RxConnect;
 
@@ -175,7 +158,6 @@ public class Passdetails extends AppCompatActivity {
 
         rxConnect=new RxConnect(Passdetails.this);
         rxConnect.setCachingEnabled(false);
-        Help=(ImageView)findViewById(R.id.HELP);
         ID_Source="Tap to select ID proof source";
         DOBDate=(ImageButton)findViewById(R.id.DOBDate);
         DOJDate=(ImageButton)findViewById(R.id.DOJDate);
@@ -211,7 +193,7 @@ public class Passdetails extends AppCompatActivity {
         spinner.setAdapter(adapter); */
         CustomAdapter customAdapter=new CustomAdapter(getApplicationContext(),paths);
         spinner.setAdapter(customAdapter);
-
+        spinner.setPrompt("Select The source");
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -228,17 +210,6 @@ public class Passdetails extends AppCompatActivity {
         });
        //adding validation to edittexts
         mAwesomeValidation.addValidation(Passdetails.this, R.id.name,  "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.err_name);
-
-
-      Help.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-
-              startActivity(new Intent(Passdetails.this,HelpActivity.class));
-
-          }
-      });
-
 
 
 
@@ -299,7 +270,7 @@ public class Passdetails extends AppCompatActivity {
                             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                                Log.v("Mainas5",dataSnapshot.toString());
+
 
 
                                 if(dataSnapshot.hasChild(sdf.format(myCalendar.getTime())))
@@ -427,7 +398,7 @@ public class Passdetails extends AppCompatActivity {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                                    Log.v("Mainas5",dataSnapshot.toString());
+
 
 
                                     if(dataSnapshot.hasChild(DateOfJourney))
@@ -457,7 +428,7 @@ public class Passdetails extends AppCompatActivity {
 
                 }
 
-                Log.v("Mainas3",DateOfJourney);
+
                // SubmitApplication();
 
             }
@@ -559,13 +530,6 @@ public class Passdetails extends AppCompatActivity {
         final String DateOfJourney=Dateofjourney.getText().toString().trim();
 
 
-    /*    Log.v("TAG",Names);
-        Log.v("TAG",Addresses);
-        Log.v("TAG",Mobiles);
-        Log.v("TAG",ID_NO);*/
-        Log.v("TAG",Purposes);
-//        Log.v("TAG profile",profilephoto.toString());
-        Log.v("ScanUID",scaniduri.toString());
 
 
             mDialog.setMessage("Submitting your form");
@@ -616,7 +580,7 @@ public class Passdetails extends AppCompatActivity {
                                  //    String URL=
 //"http://mobicomm.dove-sms.com/mobicomm//submitsms.jsp?user=SACHIN&key=d4c5c9993fXX&mobile=91"+Mobiles+"&message=Pass submitted pass "+id+"please keep it safe)&senderid=INFOSM&accusage=1";
 
-                                    String URL="http://mobicomm.dove-sms.com/mobicomm//submitsms.jsp?user=SACHIN&key=d4c5c9993fXX&mobile=918093679890&message=(test sms)&senderid=INFOSM&accusage=1";
+                                 //   String URL="http://mobicomm.dove-sms.com/mobicomm//submitsms.jsp?user=SACHIN&key=d4c5c9993fXX&mobile=918093679890&message=(test sms)&senderid=INFOSM&accusage=1";
 
 
 
@@ -629,7 +593,7 @@ public class Passdetails extends AppCompatActivity {
                                             notify.putExtra("Values", "Form submitted pass_no "+id);
 
                                             notify.setAction("Pas_with_some_value_has_changed");
-                                            Log.v("Maina", "start6");
+
                                             sendBroadcast(notify);
 
 
@@ -640,8 +604,6 @@ public class Passdetails extends AppCompatActivity {
 
 
 
-                                    Log.v("Maina", "start5");
-                                    Log.v("Maina", "start7");
 
                                     Payment.setEnabled(false);
                                     Transaction_Id.setText(id);
@@ -692,7 +654,7 @@ public class Passdetails extends AppCompatActivity {
                 //do something on result
 
                 Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
-                Log.v("maina123",result+"Hello");
+
             }
 
             @Override
@@ -710,7 +672,7 @@ public class Passdetails extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),throwable.getMessage(),Toast.LENGTH_SHORT).show();
 
-                //    Log.v("Posted",throwable.getMessage().toString()+"---Error");
+
             }
 
         });
@@ -767,25 +729,13 @@ public class Passdetails extends AppCompatActivity {
                 //Getting the payment confirmation
                 PaymentConfirmation confirm = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
 
-                Log.v("Here",state +" here i am confirm"+confirm.toJSONObject().toString());
+
 
                 //if confirmation is not null
                 if (confirm != null) {
                     try {
 
-                        Log.v("Here",state +" here i am in try");
-                        //Getting the payment details
-                        String paymentDetails = confirm.toJSONObject().toString(4);
-                        Log.v("paymentExample", paymentDetails);
 
-                        /*
-                            "response": {
-                                           "state": "approved",
-                                           "id": "PAY-2RW02143UH910782FK7WXORI",
-                                           "create_time": "2016-09-29T20:19:28Z",
-                                           "intent": "sale"
-                                        }
-                         */
                         JSONObject object=confirm.toJSONObject();
                         JSONObject response=object.getJSONObject("response");
                         state=response.getString("state");
@@ -795,24 +745,24 @@ public class Passdetails extends AppCompatActivity {
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
                         bitmap_BAR_CODE.compress(Bitmap.CompressFormat.PNG, 100, stream);
                         BARCODE_BYTE_ARRAY = stream.toByteArray();
-                      Log.v("Here",state);
+
 
                         if(state.equals("approved"))
                         {
-                            Log.v("Here",state +" here i am ");
+
                                 SubmitApplication();
                         }
                     } catch (JSONException e) {
-                        Log.e("paymentExample", "an extremely unlikely failure occurred: ", e);
+
                     } catch (WriterException e) {
                         e.printStackTrace();
                         Toast.makeText(getApplicationContext(),"Unable to generate barcode image",Toast.LENGTH_SHORT).show();
                     }
                 }
             } else if (resultCode == Activity.RESULT_CANCELED) {
-                Log.i("paymentExample", "The user canceled.");
+
             } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
-                Log.i("paymentExample", "An invalid Payment or PayPalConfiguration was submitted. Please see the docs.");
+
             }
         }
 

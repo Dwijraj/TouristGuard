@@ -9,17 +9,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,10 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(firebaseAuth.getCurrentUser()!=null)
                 {
-                    Log.v("Maina","start -1");
+
                     /* If the user is logged in takes user to the apply pass activity*/
                     Intent Apply=new Intent(MainActivity.this,ApplyPass.class);
                     Apply.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -98,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!Phone.getText().toString().isEmpty()) {            //makes sure that user enter his/her phone number
                     prog.setMessage("Signing you..");
 
-                    Log.v("HERE", "WHERE");
+
 
                     final String IMEI = Phone.getText().toString();
                   //  final String IMEI = "455567888344432";
@@ -107,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
                     //   Toast.makeText(getApplicationContext(),IMEI,Toast.LENGTH_SHORT).show();
 
-                    Log.v("HERE", IMEI);
+
 
                     prog.show();
 
@@ -124,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
 
-                                    Log.v("TAG1", "CREATED AND SIGNED IN");
 
                                     DatabaseReference particular_user = mDatabaseref.child(mAuth.getCurrentUser().getUid());
                                     particular_user.child("IMEI").setValue(IMEI);
@@ -145,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
 
-                                    Log.v("TAG1", "CREATED CAN'T SIGNED IN");
+
 
                                     prog.dismiss();
                                     Toast.makeText(getApplicationContext(), e.getMessage().toString(), Toast.LENGTH_SHORT).show();

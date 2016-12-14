@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="firebaseapps.com.pass.MainActivity"
-    android:background="@color/colorPrimary">
+    android:background="@drawable/tourist_pass">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,14 +24,18 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true">
             <EditText
+                android:textColor="#000000"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
                 android:ems="10"
+                android:minHeight="23dp"
+                android:gravity="center"
+                android:textColorHint="#000000"
                 android:id="@+id/editText3"
                 android:hint="@string/enter_phone_number"
-                android:background="#ffff" />
+                android:background="@null" />
 
 
         </LinearLayout>
@@ -42,6 +46,7 @@
            android:layout_marginTop="40dp">
 
            <Button
+
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:text="@string/get_started"

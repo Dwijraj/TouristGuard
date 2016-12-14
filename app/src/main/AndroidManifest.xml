@@ -16,12 +16,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ApplyPass"></activity>
+        <activity android:name=".ApplyPass" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Passdetails" />
         <activity android:name=".CheckPassDetails" />
-        <activity android:name=".Adminlogin" />
-        <activity android:name=".AdminPage" />
         <activity android:name=".ChangeDetails" />
 
         <service
@@ -55,7 +53,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HelpActivity"></activity>
+        <activity android:name=".HelpActivity" />
+        <activity android:name=".GetStarted"></activity>
     </application>
 
 </manifest>

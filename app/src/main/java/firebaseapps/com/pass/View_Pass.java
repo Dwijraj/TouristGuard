@@ -1,7 +1,6 @@
 package firebaseapps.com.pass;
 
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,24 +21,6 @@ public class View_Pass extends AppCompatActivity {
     private EditText pass_no;
     private Button view;
     private FirebaseAuth mAuth;
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        finish();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        finish();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

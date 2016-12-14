@@ -28,13 +28,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.paypal.android.sdk.payments.PaymentActivity;
-import com.paypal.android.sdk.payments.PaymentConfirmation;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.net.URI;
 
 public class Vehicles extends AppCompatActivity {
 
@@ -166,7 +159,7 @@ public class Vehicles extends AppCompatActivity {
                         public void onClick(View v) {
 
                             Selected=radioGroup.getCheckedRadioButtonId();
-                            Log.v("MainaPass",Selected+"");
+
                             String Sel=Selected+"";
 
                             if(Sel.equals("2131427515"))
@@ -269,7 +262,6 @@ public class Vehicles extends AppCompatActivity {
                                     }
                                 });
                             }
-                            Log.v("MainaPass1",Selected+"");
 
                         }
                     });
@@ -546,8 +538,7 @@ public class Vehicles extends AppCompatActivity {
                                         notify.putExtra("Values", "Vehicle booked for pass_no "+PASS_WHICH_BOOKED);
 
                                         notify.setAction("Pas_with_some_value_has_changed");
-                                        Log.v("Maina", "start6");
-                                        sendBroadcast(notify);
+                                         sendBroadcast(notify);
 
 
 
@@ -791,7 +782,7 @@ public class Vehicles extends AppCompatActivity {
                                         notify.putExtra("Values", "Vehicle booked for pass_no "+PASS_WHICH_BOOKED);
 
                                         notify.setAction("Pas_with_some_value_has_changed");
-                                        Log.v("Maina", "start6");
+
                                         sendBroadcast(notify);
 
 

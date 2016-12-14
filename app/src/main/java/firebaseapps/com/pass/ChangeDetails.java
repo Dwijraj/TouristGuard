@@ -144,11 +144,6 @@ public class ChangeDetails extends AppCompatActivity {
 
                                             boolean Check=Today.before(date_from_three_days);
 
-                                            Log.v("Actual_Date",date_from_three_days.toString());
-                                            Log.v("todays_date",Today.toString());
-                                            Log.v("Check",String.valueOf(Check));
-
-
                                             if(Check || Today.equals(date_from_three_days))
                                             {
 
@@ -178,9 +173,6 @@ public class ChangeDetails extends AppCompatActivity {
                                                         UNAVAILABLE_DATES.addValueEventListener(new ValueEventListener() {
                                                             @Override
                                                             public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                                                                Log.v("Mainas5",dataSnapshot.toString());
 
 
                                                                 if(dataSnapshot.hasChild(sdf.format(myCalendar.getTime())))
@@ -262,57 +254,13 @@ public class ChangeDetails extends AppCompatActivity {
                         }
                     });
 
-
-
-
-                  /*  final Calendar mcurrentDate = Calendar.getInstance();
-
-                    final Calendar  m_three_months = Calendar.getInstance();
-
-                    m_three_months.add(Calendar.MONTH,2);
-                    mcurrentDate.add(Calendar.DAY_OF_MONTH,5);
-                    mYear  = mcurrentDate.get(Calendar.YEAR);
-                    mMonth = mcurrentDate.get(Calendar.MONTH);
-                    mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
-
-                    DatePickerDialog mDatePicker = new DatePickerDialog(ChangeDetails.this, new DatePickerDialog.OnDateSetListener() {
-                        public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-                            final  Calendar myCalendar = Calendar.getInstance();
-                            //Calendar myCalenderCopy;
-                            myCalendar.set(Calendar.YEAR, selectedyear);
-                            myCalendar.set(Calendar.MONTH, selectedmonth);
-                            myCalendar.set(Calendar.DAY_OF_MONTH, selectedday);
-
-                            // myCalenderCopy=myCalendar;
-
-                            String myFormat = "dd-MM-yyyy"; //Change as you need
-                            final SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRANCE);
-
-                            DOJ.setText(sdf.format(myCalendar.getTime()));
-
-
-
-
-                            mDay = selectedday;
-                            mMonth = selectedmonth;
-                            mYear = selectedyear;
-                        }
-                    }, mYear, mMonth, mDay);
-                    mDatePicker.getDatePicker().setMinDate(mcurrentDate.getTimeInMillis());
-                    mDatePicker.getDatePicker().setMaxDate(m_three_months.getTimeInMillis());
-                    // mDatePicker.setTitle("Select date");
-                    mDatePicker.show(); */
-                }
+           }
 
 
 
 
             }
         });
-
-
-
-
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -414,11 +362,8 @@ public class ChangeDetails extends AppCompatActivity {
                         JSONObject object=confirm.toJSONObject();
                         JSONObject response=object.getJSONObject("response");
                         state=response.getString("state");
-
-                        Log.v("Here",state);
-
-                        if(state.equals("approved"))
-                        {
+                         if(state.equals("approved"))
+                            {
                            DatabaseReference changeDate=mDatabaseref.child(passno).child("DateOfJourney");      //Reference to Date of Journey
                            DatabaseReference ChangeDate=mDatabaseref.child(passno).child("Uid");
                             String DOJ_new=DOJ.getText().toString().trim();             //Gets the new DOJ
@@ -498,13 +443,13 @@ public class ChangeDetails extends AppCompatActivity {
 
                         }
                     } catch (JSONException e) {
-                        Log.e("paymentExample", "an extremely unlikely failure occurred: ", e);
+
                     }
                 }
             } else if (resultCode == Activity.RESULT_CANCELED) {
-                Log.i("paymentExample", "The user canceled.");
+
             } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
-                Log.i("paymentExample", "An invalid Payment or PayPalConfiguration was submitted. Please see the docs.");
+
             }
         }
 

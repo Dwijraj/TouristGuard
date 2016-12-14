@@ -8,35 +8,25 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.*;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.android.gms.tasks.OnSuccessListener;
+
+
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 public class ApplyPass extends AppCompatActivity {
 
-    private final int SPLASH_DISPLAY_LENGTH = 1000;
+
     private DatabaseReference mDatabaseref;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthlistener;
     private Button applypass;
     private Button checkpassstatus;
-    private Button Loginasadmin;
     private Button ViewPass;
     private String user;
     private Button changepassdetails;
@@ -45,11 +35,11 @@ public class ApplyPass extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apply_pass);
 
-        Log.v("Maina","start 0");
+
         mDatabaseref= FirebaseDatabase.getInstance().getReference().child("Applications");      //Reference to where the applications are stored
         applypass=(Button)findViewById(R.id.getstarted);                                        //To apply for new pass
         checkpassstatus=(Button)findViewById(R.id.checkpassstatus);                             //To check pass status
-        Loginasadmin=(Button)findViewById(R.id.loginasadmin);                                   //To login as admin
+        //To login as admin
         changepassdetails=(Button)findViewById(R.id.Changepassdetails);                         //To change the details of the pass
         ViewPass=(Button)findViewById(R.id.Viewpass);                                           //To view the pass
 
@@ -80,7 +70,7 @@ public class ApplyPass extends AppCompatActivity {
                         {
 
                     /* If the user is not  logged in takes Allows user to register first*/
-                                Intent Apply=new Intent(ApplyPass.this,MainActivity.class);
+                                Intent Apply=new Intent(ApplyPass.this,GetStarted.class);
                                 Apply.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP  | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(Apply);
 
@@ -91,19 +81,6 @@ public class ApplyPass extends AppCompatActivity {
                         }
             }
         };
-
-
-
-
-
-     /*   Loginasadmin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent login_admin=new Intent(ApplyPass.this,Adminlogin.class);     //Login as admin
-                startActivity(login_admin);
-            }
-        }); */
-
         applypass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

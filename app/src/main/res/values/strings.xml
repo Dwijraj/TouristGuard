@@ -4,13 +4,7 @@
     <string name="enter_phone_number">Enter phone number</string>
     <string name="apply_for_a_pass">APPLY FOR A PASS</string>
     <string name="Name">Name</string>
-    <string name="Transaction">Please copy the transaction id after payment keep it safe to query about your application later</string>
-    <string name="nameerror">Enter a valid name</string>
-    <string name="emailerror">Enter a valid email</string>
-    <string name="mobileerror">Enter a valid mobile</string>
-    <string name="dateerror">Enter a valid date</string>
-    <string name="ageerror">Enter a valid age</string>
-    <string name="err_name">Incorrect characters for name</string>
+    <string name="err_name">Check the characters used</string>
 
 </resources>
 
