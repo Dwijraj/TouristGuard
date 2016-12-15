@@ -33,7 +33,6 @@ import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.Request;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -447,7 +446,7 @@ public class Passdetails extends AppCompatActivity {
         Map<EncodeHintType, Object> hints = null;
         String encoding = guessAppropriateEncoding(contentsToEncode);
         if (encoding != null) {
-            hints = new EnumMap<EncodeHintType, Object>(EncodeHintType.class);
+            hints = new EnumMap<>(EncodeHintType.class);
             hints.put(EncodeHintType.CHARACTER_SET, encoding);
         }
         MultiFormatWriter writer = new MultiFormatWriter();
@@ -687,8 +686,7 @@ public class Passdetails extends AppCompatActivity {
         if(resultCode==RESULT_OK && requestCode==PROFILE_PHOTO)
         {
             //When Applicant photo is selected
-            if(requestCode==PROFILE_PHOTO)
-            {
+
                 profilephoto=data.getData();
 
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
@@ -704,13 +702,12 @@ public class Passdetails extends AppCompatActivity {
 
                // Profile.setImageURI(profilephoto);
 
-            }
+
         }
         else if(resultCode==RESULT_OK && requestCode==SCAN_ID)
         {
             //when applicant scanned user id is selected
-            if(requestCode==SCAN_ID)
-            {
+
                 scaniduri=data.getData();
 
                 Glide.with(Passdetails.this)
@@ -719,7 +716,7 @@ public class Passdetails extends AppCompatActivity {
 
 
                // scan_id.setImageURI(scaniduri);
-            }
+
 
         }
         else  if (requestCode == PAYPAL_REQUEST_CODE) {
@@ -759,10 +756,6 @@ public class Passdetails extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Unable to generate barcode image",Toast.LENGTH_SHORT).show();
                     }
                 }
-            } else if (resultCode == Activity.RESULT_CANCELED) {
-
-            } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
-
             }
         }
 

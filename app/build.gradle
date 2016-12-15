@@ -17,7 +17,7 @@ android {
                 enable true
                 reset()
                 include 'x86', 'armeabi', 'armeabi-v7a', 'mips'
-                universalApk true
+                universalApk false
             }
         }
 
@@ -61,7 +61,7 @@ dependencies {
     compile 'com.google.firebase:firebase-auth:9.6.0'
     compile 'com.google.android.gms:play-services-gcm:9.6.0'
     compile 'com.paypal.sdk:paypal-android-sdk:2.15.0'
-    compile 'com.journeyapps:zxing-android-embedded:3.0.2@aar'
+   // compile 'com.journeyapps:zxing-android-embedded:3.0.2@aar'
     compile 'com.google.zxing:core:3.2.0'
   //  compile 'shortroid.shortroid:shortroid:1.0.2'
     compile 'com.basgeekball:awesome-validation:1.3'

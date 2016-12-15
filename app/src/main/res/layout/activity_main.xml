@@ -11,7 +11,7 @@
     tools:context="firebaseapps.com.pass.MainActivity"
     android:background="@drawable/tourist_pass">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -20,9 +20,23 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true">
+
+            <LinearLayout
+                android:background="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:background="@mipmap/ic_phone_white_24dp"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
             <EditText
                 android:textColor="#000000"
                 android:layout_gravity="center"
@@ -35,26 +49,69 @@
                 android:textColorHint="#000000"
                 android:id="@+id/editText3"
                 android:hint="@string/enter_phone_number"
-                android:background="@null" />
+                android:background="#ffff" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="40dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <LinearLayout
+                android:background="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:padding="5dp"
+                    android:layout_width="wrap_content"
+                    android:background="@mipmap/ic_assignment_turned_in_white_24dp"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+
+
+
+            <EditText
+                android:textColor="#000000"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:visibility="invisible"
+                android:minHeight="23dp"
+                android:gravity="center"
+                android:textColorHint="#000000"
+                android:id="@+id/OTP"
+                android:hint="Enter the OTP"
+                android:background="#ffff" />
 
 
         </LinearLayout>
        <LinearLayout
-           android:layout_width="wrap_content"
+           android:layout_width="match_parent"
+           android:gravity="center"
+           android:layout_marginTop="10dp"
            android:layout_height="wrap_content"
-           android:layout_centerHorizontal="true"
-           android:layout_marginTop="40dp">
+           android:layout_centerHorizontal="true">
 
            <Button
 
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:text="@string/get_started"
+               android:text="GET OTP"
                android:id="@+id/button"
-               android:layout_marginTop="30dp"
+
                android:layout_below="@+id/editText3" />
 
        </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>

@@ -1,20 +1,18 @@
 package firebaseapps.com.pass;
 
-import android.app.Activity;
+
 import android.app.Dialog;
-import android.app.ProgressDialog;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -134,9 +132,7 @@ public class Vehicles extends AppCompatActivity {
                // Toast.makeText(getApplicationContext(),"Clicked",Toast.LENGTH_SHORT).show();
                 try
                 {
-                    String DRIVER_LICENSE_IMAGE_URI_STRING=DRIVER_LICENSE_URI.toString();
-                    String DOCUMENT_IMAGE_URI_STRING=DOCUMENTS_URI.toString();
-                    String INSURANCE_IMAGE_URI_STRING=INSURANCE_URI.toString();
+
                    // final String
                             DRIVER_NAME_STRING=Drivername.getText().toString().trim();
                    // final String
@@ -146,7 +142,6 @@ public class Vehicles extends AppCompatActivity {
                     NUMBER_OF_PASSENGER.setContentView(R.layout.numberofperson);
                     NUMBER_OF_PASSENGER.setTitle("Number of Passengers");
                   //  NUMBER_OF_PASSENGER.setCanceledOnTouchOutside(false);
-                    NUMBER_OF_PASSENGER.getWindow().setBackgroundDrawableResource(R.color.colorText);
                     NUMBER_OF_PASSENGER.getWindow().setTitleColor(getResources().getColor(R.color.colorPrimary));
                     NUMBER_OF_PASSENGER.show();
 
@@ -283,12 +278,10 @@ public class Vehicles extends AppCompatActivity {
 
     private void NotifyAllPassengersOneToFour() {
 
-        if(TextUtils.isEmpty(Pss1.getText().toString()))
+        if(!TextUtils.isEmpty(Pss1.getText().toString()))
         {
             // VEHICLE_DATABASE_REF.child(PASS_WHICH_BOOKED).child("PassengerSeven").setValue("N/A");
-        }
-        else
-        {
+
             final String ApplicationNo;
             ApplicationNo=Pss1.getText().toString().trim();
             APPLICATION_REF.child("Applications").child(ApplicationNo).child("Uid").addValueEventListener(new ValueEventListener() {
@@ -314,12 +307,9 @@ public class Vehicles extends AppCompatActivity {
         }
 
 
-        if(TextUtils.isEmpty(Pss2.getText().toString()))
+        if(!TextUtils.isEmpty(Pss2.getText().toString()))
         {
-            // VEHICLE_DATABASE_REF.child(PASS_WHICH_BOOKED).child("PassengerSix").setValue("N/A");
-        }
-        else
-        {
+
             final String ApplicationNo;
             ApplicationNo=Pss2.getText().toString().trim();
             APPLICATION_REF.child("Applications").child(ApplicationNo).child("Uid").addValueEventListener(new ValueEventListener() {
@@ -342,12 +332,10 @@ public class Vehicles extends AppCompatActivity {
                 }
             });
         }
-        if(TextUtils.isEmpty(Pss3.getText().toString()))
+        if(!TextUtils.isEmpty(Pss3.getText().toString()))
         {
             // VEHICLE_DATABASE_REF.child(PASS_WHICH_BOOKED).child("PassengerSeven").setValue("N/A");
-        }
-        else
-        {
+
             final String ApplicationNo;
             ApplicationNo=Pss3.getText().toString().trim();
             APPLICATION_REF.child("Applications").child(ApplicationNo).child("Uid").addValueEventListener(new ValueEventListener() {
@@ -371,15 +359,12 @@ public class Vehicles extends AppCompatActivity {
                 }
             });
         }
-        if(TextUtils.isEmpty(Pss4.getText().toString()))
+        if(!TextUtils.isEmpty(Pss4.getText().toString()))
         {
             // VEHICLE_DATABASE_REF.child(PASS_WHICH_BOOKED).child("PassengerEight").setValue("N/A");
 
 
 
-        }
-        else
-        {
             final String ApplicationNo;
             ApplicationNo=Pss4.getText().toString().trim();
             APPLICATION_REF.child("Applications").child(ApplicationNo).child("Uid").addValueEventListener(new ValueEventListener() {
@@ -837,12 +822,10 @@ public class Vehicles extends AppCompatActivity {
     }
 
     private void NotifyAllPassengers() {
-        if(TextUtils.isEmpty(Pss1.getText().toString()))
+        if(!TextUtils.isEmpty(Pss1.getText().toString()))
         {
             // VEHICLE_DATABASE_REF.child(PASS_WHICH_BOOKED).child("PassengerSeven").setValue("N/A");
-        }
-        else
-        {
+
             final String ApplicationNo;
             ApplicationNo=Pss1.getText().toString().trim();
             APPLICATION_REF.child("Applications").child(ApplicationNo).child("Uid").addValueEventListener(new ValueEventListener() {
@@ -866,12 +849,10 @@ public class Vehicles extends AppCompatActivity {
                 }
             });
         }
-        if(TextUtils.isEmpty(Pss2.getText().toString()))
+        if(!TextUtils.isEmpty(Pss2.getText().toString()))
         {
             // VEHICLE_DATABASE_REF.child(PASS_WHICH_BOOKED).child("PassengerSeven").setValue("N/A");
-        }
-        else
-        {
+
             final String ApplicationNo;
             ApplicationNo=Pss2.getText().toString().trim();
             APPLICATION_REF.child("Applications").child(ApplicationNo).child("Uid").addValueEventListener(new ValueEventListener() {
@@ -895,12 +876,10 @@ public class Vehicles extends AppCompatActivity {
                 }
             });
         }
-        if(TextUtils.isEmpty(Pss3.getText().toString()))
+        if(!TextUtils.isEmpty(Pss3.getText().toString()))
         {
             // VEHICLE_DATABASE_REF.child(PASS_WHICH_BOOKED).child("PassengerSeven").setValue("N/A");
-        }
-        else
-        {
+
             final String ApplicationNo;
             ApplicationNo=Pss3.getText().toString().trim();
             APPLICATION_REF.child("Applications").child(ApplicationNo).child("Uid").addValueEventListener(new ValueEventListener() {
@@ -924,12 +903,9 @@ public class Vehicles extends AppCompatActivity {
                 }
             });
         }
-        if(TextUtils.isEmpty(Pss4.getText().toString()))
+        if(!TextUtils.isEmpty(Pss4.getText().toString()))
         {
-            // VEHICLE_DATABASE_REF.child(PASS_WHICH_BOOKED).child("PassengerSeven").setValue("N/A");
-        }
-        else
-        {
+
             final String ApplicationNo;
             ApplicationNo=Pss4.getText().toString().trim();
             APPLICATION_REF.child("Applications").child(ApplicationNo).child("Uid").addValueEventListener(new ValueEventListener() {
@@ -953,12 +929,10 @@ public class Vehicles extends AppCompatActivity {
                 }
             });
         }
-        if(TextUtils.isEmpty(Pss5.getText().toString()))
+        if(!TextUtils.isEmpty(Pss5.getText().toString()))
         {
             // VEHICLE_DATABASE_REF.child(PASS_WHICH_BOOKED).child("PassengerSeven").setValue("N/A");
-        }
-        else
-        {
+
             final String ApplicationNo;
             ApplicationNo=Pss5.getText().toString().trim();
             APPLICATION_REF.child("Applications").child(ApplicationNo).child("Uid").addValueEventListener(new ValueEventListener() {
@@ -985,12 +959,10 @@ public class Vehicles extends AppCompatActivity {
 
       // String UID;
 
-        if(TextUtils.isEmpty(Pss6.getText().toString()))
+        if(!TextUtils.isEmpty(Pss6.getText().toString()))
         {
            // VEHICLE_DATABASE_REF.child(PASS_WHICH_BOOKED).child("PassengerSix").setValue("N/A");
-        }
-        else
-        {
+
                 final String ApplicationNo;
                 ApplicationNo=Pss6.getText().toString().trim();
                 APPLICATION_REF.child("Applications").child(ApplicationNo).child("Uid").addValueEventListener(new ValueEventListener() {
@@ -1013,12 +985,10 @@ public class Vehicles extends AppCompatActivity {
                     }
                 });
         }
-        if(TextUtils.isEmpty(Pss7.getText().toString()))
+        if(!TextUtils.isEmpty(Pss7.getText().toString()))
         {
            // VEHICLE_DATABASE_REF.child(PASS_WHICH_BOOKED).child("PassengerSeven").setValue("N/A");
-        }
-        else
-        {
+
             final String ApplicationNo;
             ApplicationNo=Pss7.getText().toString().trim();
             APPLICATION_REF.child("Applications").child(ApplicationNo).child("Uid").addValueEventListener(new ValueEventListener() {
@@ -1042,15 +1012,13 @@ public class Vehicles extends AppCompatActivity {
                 }
             });
         }
-        if(TextUtils.isEmpty(Pss8.getText().toString()))
+        if(!TextUtils.isEmpty(Pss8.getText().toString()))
         {
            // VEHICLE_DATABASE_REF.child(PASS_WHICH_BOOKED).child("PassengerEight").setValue("N/A");
 
 
 
-        }
-        else
-        {
+
             final String ApplicationNo;
             ApplicationNo=Pss8.getText().toString().trim();
             APPLICATION_REF.child("Applications").child(ApplicationNo).child("Uid").addValueEventListener(new ValueEventListener() {
@@ -1074,12 +1042,9 @@ public class Vehicles extends AppCompatActivity {
                 }
             });
         }
-        if(TextUtils.isEmpty(Pss9.getText().toString()))
+        if(!TextUtils.isEmpty(Pss9.getText().toString()))
         {
-          //  VEHICLE_DATABASE_REF.child(PASS_WHICH_BOOKED).child("PassengerNine").setValue("N/A");
-        }
-        else
-        {
+
             final String ApplicationNo;
             ApplicationNo=Pss9.getText().toString().trim();
             APPLICATION_REF.child("Applications").child(ApplicationNo).child("Uid").addValueEventListener(new ValueEventListener() {
@@ -1103,12 +1068,10 @@ public class Vehicles extends AppCompatActivity {
                 }
             });
         }
-        if(TextUtils.isEmpty(Pss10.getText().toString()))
+        if(!TextUtils.isEmpty(Pss10.getText().toString()))
         {
           //  VEHICLE_DATABASE_REF.child(PASS_WHICH_BOOKED).child("PassengerTen").setValue("N/A");
-        }
-        else
-        {
+
             final String ApplicationNo;
             ApplicationNo=Pss10.getText().toString().trim();
             APPLICATION_REF.child("Applications").child(ApplicationNo).child("Uid").addValueEventListener(new ValueEventListener() {
