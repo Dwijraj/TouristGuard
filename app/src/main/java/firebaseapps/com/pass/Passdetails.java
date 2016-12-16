@@ -567,7 +567,8 @@ public class Passdetails extends AppCompatActivity {
                                     newapplication.child("DateOfBirth").setValue(DateOfBirth);
                                     newapplication.child("DateOfJourney").setValue(DateOfJourney);
                                     newapplication.child("ID_Source").setValue(ID_Source);
-
+                                    newapplication.child("Carnumber").setValue("N/A");
+                                    newapplication.child("Drivername").setValue("N/A");
 
                                     Application_status.setText("Payment state :"+"Payment Received processing"+"\n" +"Transaction Id \n" +id);
 

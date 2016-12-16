@@ -21,8 +21,10 @@ public class Application {
   public  String DateOfJourney;
   public  String Barcode_Image;
   public String ID_Source;
+    public String Carnumber;
+    public String Drivername;
 
-    public Application(String name, String address, String mobile, String ID_No, String purpose, String applicantPhoto, String applicantScanId, String uid, String applicationStatus, String dateOfBirth, String dateOfJourney,String barcode_Image,String id_source) {
+    public Application(String name, String address, String mobile, String ID_No, String purpose, String applicantPhoto, String applicantScanId, String uid, String applicationStatus, String dateOfBirth, String dateOfJourney,String barcode_Image,String id_source,String Carnumber,String Drivername) {
         Name = name;
         Address = address;
         Mobile = mobile;
@@ -32,6 +34,8 @@ public class Application {
         ApplicantPhoto = applicantPhoto;
         ApplicantScanId = applicantScanId;
         Uid = uid;
+        this.Carnumber=Carnumber;
+        this.Drivername=Drivername;
         ID_Source=id_source;
         ApplicationStatus = applicationStatus;
         DateOfBirth = dateOfBirth;

@@ -3,6 +3,7 @@ package firebaseapps.com.pass;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,14 +54,18 @@ public class View_Pass extends AppCompatActivity {
                                 DatabaseReference ValidTheUser;
                                 ValidTheUser=databaseReference.child(PASS_NO).child("Uid");
 
+                                Log.v("HereNow","working");
+
                                 ValidTheUser.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
 
+                                        Log.v("HereNow","working2");
                                         String User_Id=dataSnapshot.getValue(String.class);
 
                                         if(User_Id.equals(mAuth.getCurrentUser().getUid()))
                                         {
+                                            Log.v("HereNow","working2");
                                             Intent view=new Intent(View_Pass.this,ViewPass.class);
                                             view.putExtra("Pass",PASS_NO);
 

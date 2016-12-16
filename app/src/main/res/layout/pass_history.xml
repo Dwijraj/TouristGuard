@@ -231,6 +231,55 @@
                 android:layout_marginLeft="20dp"/>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Driver Name"
+                android:textSize="15sp"
+                android:textColor="#ffff"/>
+
+            <TextView
+                android:layout_marginTop="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Driver Name"
+                android:gravity="center"
+                android:textColor="#ffff"
+                android:id="@+id/DriverNAME"
+                android:layout_marginLeft="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Car number"
+                android:textSize="15sp"
+                android:textColor="#ffff"
+                android:id="@+id/textView2" />
+
+            <TextView
+                android:layout_marginTop="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Car Number"
+                android:gravity="center"
+                android:textColor="#ffff"
+                android:id="@+id/Carnumbers"
+                android:layout_marginLeft="20dp"/>
+        </LinearLayout>
+
 
 
 

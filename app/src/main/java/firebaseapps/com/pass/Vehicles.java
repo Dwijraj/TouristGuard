@@ -40,9 +40,9 @@ public class Vehicles extends AppCompatActivity {
     private Dialog NUMBER_OF_PASSENGER;
     private Dialog PASSENGER_NAME;
     private EditText Operatorname;
-    private EditText Pss1;//=(EditText)PASSENGER_NAME.findViewById(R.id.pass1);
-    private EditText Pss2;//=(EditText)PASSENGER_NAME.findViewById(R.id.pass2);
-    private EditText Pss3;//=(EditText)PASSENGER_NAME.findViewById(R.id.pass3);
+    private EditText Pss1;
+    private EditText Pss2;
+    private EditText Pss3;
     private EditText Pss4;//=(EditText)PASSENGER_NAME.findViewById(R.id.pass4);
     private EditText Pss5;//=(EditText)PASSENGER_NAME.findViewById(R.id.pass5);
     private EditText Pss6;//=(EditText)PASSENGER_NAME.findViewById(R.id.pass6);

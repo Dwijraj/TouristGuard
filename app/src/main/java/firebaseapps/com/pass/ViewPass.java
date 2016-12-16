@@ -32,6 +32,8 @@ public class ViewPass extends AppCompatActivity {
     private TextView ID_No2;
     private TextView Purpose2;
     private TextView Scan_id2;
+    private TextView DriverName;
+    private TextView CarNumber;
     private ImageView Profile2;
     private  String pass;
     private TextView Application_status2;
@@ -52,6 +54,8 @@ public class ViewPass extends AppCompatActivity {
             finish();
         setContentView(R.layout.pass_history);
 
+        CarNumber=(TextView)findViewById(R.id.Carnumbers);
+        DriverName=(TextView)findViewById(R.id.DriverNAME);
       final  ImageView imageView=(ImageView) findViewById(R.id.BAR_CODE_SHOW);
        final TextView  Pass=(TextView)findViewById(R.id.PassNumber);
         generatebarcode=(Button)findViewById(R.id.Display_Bar_Code);
@@ -102,6 +106,8 @@ public class ViewPass extends AppCompatActivity {
                 Purpose2.setText(app.Purpose);
                 Application_status2.setText(app.ApplicationStatus.toUpperCase());
                 ID_source.setText(app.ID_Source);
+                CarNumber.setText(app.Carnumber);
+                DriverName.setText(app.Drivername);
 
                 if(app.ApplicationStatus.contains("Verified"))
                 {

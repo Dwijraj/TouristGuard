@@ -170,11 +170,38 @@
 
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/CarNums"
+            android:layout_marginTop="50dp"
+            android:layout_below="@+id/Operator"
+            android:layout_height="match_parent">
 
 
-        <RelativeLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Car Number :"
+                android:textColor="#ffff"
+                android:textSize="25dp"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:minWidth="200sp"
+                android:gravity="center"
+                android:id="@+id/CarNumber"
+                android:inputType="text"
+                android:background="#ffff"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
             android:layout_marginTop="20dp"
-            android:layout_below="@id/Operator"
+            android:layout_below="@id/CarNums"
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_centerHorizontal="true"
@@ -193,7 +220,7 @@
 
             </LinearLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
 
 
 
