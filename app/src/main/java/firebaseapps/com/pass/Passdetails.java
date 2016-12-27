@@ -27,11 +27,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -73,7 +73,7 @@ import java.util.Map;
 
 import mohitbadwal.rxconnect.RxConnect;
 
-import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
+//import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
 
 //http://mobicomm.dove-sms.com/mobicomm//submitsms.jsp?user=SACHIN&key=d4c5c9993fXX&mobile=91(9437510178)&message=(test sms)&senderid=INFOSM&accusage=1
 
@@ -89,6 +89,9 @@ public class Passdetails extends AppCompatActivity {
     private EditText Name;
     private byte[] byteArray;
     private Bitmap bitmap_BAR_CODE;
+    private LinearLayout ERROR_NAME;
+    private LinearLayout ERROR_MOBILE;
+    private LinearLayout ERROR_DATE;
     private int WRITE_EXST=1000;
     private EditText Address;
     private EditText Mobile;
@@ -122,12 +125,12 @@ public class Passdetails extends AppCompatActivity {
     private Spinner spinner;
     private String id;
     public static final int PAYPAL_REQUEST_CODE = 123;
-    private AwesomeValidation mAwesomeValidation;
+  //  private AwesomeValidation mAwesomeValidation;
     public static int THE_TEST=0;
     private String MOBILE_NUMBER;
     String URL="http://mobicomm.dove-sms.com/mobicomm/submitsms.jsp";//?user=SACHIN&key=d4c5c9993fXX&mobile=918093679890&message=(test sms)&senderid=INFOSM&accusage=1";
     private DatePicker datePicker;
-    private static  final String[]paths = {"Tap to select ID proof source","Passport", "Driving License", "Adhar Card","PAN"};
+    private static  final String[]paths = {"","Passport", "Driving License", "Adhar Card","PAN"};
     private Calendar calendar;
     private int mDay, mMonth ,mYear;
     //Paypal Configuration Object
@@ -148,13 +151,16 @@ public class Passdetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passdetails);
         THE_TEST=1;
-        mAwesomeValidation = new AwesomeValidation(BASIC);
+        //mAwesomeValidation = new AwesomeValidation(BASIC);
 
 
 
 
         dialog=new Dialog(Passdetails.this);
 
+        ERROR_DATE=(LinearLayout)findViewById(R.id.DATE_ERROR);
+        ERROR_MOBILE=(LinearLayout)findViewById(R.id.MOBILE_ERROR);
+        ERROR_NAME=(LinearLayout)findViewById(R.id.NAME_ERROR);
         rxConnect=new RxConnect(Passdetails.this);
         rxConnect.setCachingEnabled(false);
         ID_Source="Tap to select ID proof source";
@@ -208,12 +214,48 @@ public class Passdetails extends AppCompatActivity {
             }
         });
        //adding validation to edittexts
-        mAwesomeValidation.addValidation(Passdetails.this, R.id.name,  "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.err_name);
+        //mAwesomeValidation.addValidation(Passdetails.this, R.id.name,  "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.err_name);
 
 
 
 
-        Name.addTextChangedListener(new TextWatcher() {
+       Name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+                String Number=extractNumber(s.toString());
+
+                if(!Number.isEmpty())
+                {
+                    if(ERROR_NAME.getVisibility()== View.INVISIBLE)
+                    {
+                        ERROR_NAME.setVisibility(View.VISIBLE);
+                    }
+                }
+                else
+                {
+                    if(ERROR_NAME.getVisibility()== View.VISIBLE)
+                    {
+                        ERROR_NAME.setVisibility(View.INVISIBLE);
+                    }
+                }
+
+            }
+        });
+
+        Mobile.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -227,13 +269,31 @@ public class Passdetails extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                if (mAwesomeValidation.validate())
+                if(s.length()!=10)
                 {
+                    if(ERROR_MOBILE.getVisibility()== View.INVISIBLE)
+                    {
+                        ERROR_MOBILE.setVisibility(View.VISIBLE);
+                    }
 
+                }
+                else
+                {
+                    if(ERROR_MOBILE.getVisibility()== View.VISIBLE)
+                    {
+                        ERROR_MOBILE.setVisibility(View.INVISIBLE);
+                    }
                 }
 
             }
         });
+
+
+
+
+
+
+
         DOJDate.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -275,10 +335,19 @@ public class Passdetails extends AppCompatActivity {
                                 if(dataSnapshot.hasChild(sdf.format(myCalendar.getTime())))
                                 {
                                     Toast.makeText(getApplicationContext(),"Selected date is unavailable",Toast.LENGTH_SHORT).show();
+                                    if(ERROR_DATE.getVisibility()== View.INVISIBLE)
+                                    {
+                                        ERROR_DATE.setVisibility(View.VISIBLE);
+                                    }
                                 }
                                 else
                                 {
                                     Dateofjourney.setText(sdf.format(myCalendar.getTime()));
+
+                                    if(ERROR_DATE.getVisibility()== View.VISIBLE)
+                                    {
+                                        ERROR_DATE.setVisibility(View.INVISIBLE);
+                                    }
                                 }
 
                             }
@@ -388,9 +457,10 @@ public class Passdetails extends AppCompatActivity {
                 } else
                 {
 
-                    if(mAwesomeValidation.validate())
-                    {
-                        if(  !( ID_Source.equals("Tap to select ID proof source") ||  TextUtils.isEmpty(Names) || TextUtils.isEmpty(Addresses) || TextUtils.isEmpty(DateOfJourney) || TextUtils.isEmpty(DateOfBirth) || TextUtils.isEmpty(Mobiles) || TextUtils.isEmpty(ID_NO) || TextUtils.isEmpty(Purposes) || TextUtils.isEmpty(byteArray.toString()) || TextUtils.isEmpty(scaniduri.toString()) ) )
+                   // if(mAwesomeValidation.validate())
+                  //  {
+                        if(  !( ID_Source.equals("Tap to select ID proof source") ||  TextUtils.isEmpty(Names) || TextUtils.isEmpty(Addresses) || TextUtils.isEmpty(DateOfJourney) || TextUtils.isEmpty(DateOfBirth) || TextUtils.isEmpty(Mobiles) || TextUtils.isEmpty(ID_NO) || TextUtils.isEmpty(Purposes) || TextUtils.isEmpty(byteArray.toString()) || TextUtils.isEmpty(scaniduri.toString()) )
+                                &&ERROR_NAME.getVisibility()==View.INVISIBLE&&ERROR_MOBILE.getVisibility()==View.INVISIBLE&&ERROR_DATE.getVisibility()==View.INVISIBLE)
                         {
                             UNAVAILABLE_DATES.addValueEventListener(new ValueEventListener() {
                                 @Override
@@ -420,9 +490,33 @@ public class Passdetails extends AppCompatActivity {
                         }
                         else
                         {
-                            Toast.makeText(getApplicationContext(),"Please fill the empty fields and upload your profile photo and Scan_id",Toast.LENGTH_SHORT).show();
+                            if(ERROR_NAME.getVisibility()==View.VISIBLE||ERROR_MOBILE.getVisibility()==View.VISIBLE||ERROR_DATE.getVisibility()==View.VISIBLE)
+                            {
+                                if(ERROR_NAME.getVisibility()==View.VISIBLE)
+                                {
+
+                                    Toast.makeText(getApplicationContext(),"Please enter valid Name",Toast.LENGTH_SHORT).show();
+                                }
+                              else  if(ERROR_MOBILE.getVisibility()==View.VISIBLE)
+                                {
+
+                                    Toast.makeText(getApplicationContext(),"Please enter valid mobile number",Toast.LENGTH_SHORT).show();
+                                }
+                              else  if(ERROR_DATE.getVisibility()==View.VISIBLE)
+                                {
+
+                                    Toast.makeText(getApplicationContext(),"Please enter valid Date",Toast.LENGTH_SHORT).show();
+                                }
+
+
+                            }
+                            else
+                            {
+                                Toast.makeText(getApplicationContext(),"Please fill the empty fields and upload your profile photo and Scan_id",Toast.LENGTH_SHORT).show();
+
+                            }
                         }
-                    }
+                  //  }
 
 
                 }
@@ -679,6 +773,49 @@ public class Passdetails extends AppCompatActivity {
 
 
     }
+    int[] getResolution(int a,int b)
+    {   int[] p=new int[2];
+        if(a>950&&a<1900)
+        {
+            p[0]=a/2;
+            p[1]=b/2;
+        }
+        else if (a>=1900&&a<3800)
+        {
+            p[0]=a/4;
+            p[1]=b/4;
+        }
+        else if (a>=3800&&a<7600)
+        {
+            p[0]=a/8;
+            p[1]=b/8;
+        }
+        else
+        {
+            p[0]=a;
+            p[1]=b;
+        }
+        return p;
+    }
+
+    public static String extractNumber(final String str) {
+
+        if(str == null || str.isEmpty()) return "";
+
+        StringBuilder sb = new StringBuilder();
+        boolean found = false;
+        for(char c : str.toCharArray()){
+            if(Character.isDigit(c)){
+                sb.append(c);
+                found = true;
+            } else if(found){
+                // If we already found a digit before and this char is not a digit, stop looping
+                break;
+            }
+        }
+
+        return sb.toString();
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -691,6 +828,13 @@ public class Passdetails extends AppCompatActivity {
                 profilephoto=data.getData();
 
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
+
+
+            int p[]=getResolution(photo.getWidth(),photo.getHeight());
+            photo=Bitmap.createScaledBitmap(photo,p[0],p[1],true);
+
+
+
 
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 photo.compress(Bitmap.CompressFormat.PNG, 100, stream);

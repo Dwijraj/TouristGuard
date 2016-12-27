@@ -14,13 +14,7 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        if (intent.getAction().equals(ACTION)) {            //Executed when phone boots up
-            //Service
-            String status = NetworkUtil.getConnectivityStatusString(context);
-
-
-        }
-        else {
+        if (!intent.getAction().equals(ACTION)) {            //Executed when phone boots up
             String status = NetworkUtil.getConnectivityStatusString(context);       //Gets the network status
 
             if (status.equals("Wifi enabled") || status.equals("Mobile data enabled")) {
@@ -31,6 +25,7 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
                 Intent serviceIntent = new Intent(context, MyService.class);
                 context.stopService(serviceIntent);                                 //Stops the service whenever disconnected
             }
+
         }
     }
 }

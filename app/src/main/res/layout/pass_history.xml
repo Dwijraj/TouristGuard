@@ -12,30 +12,35 @@
         android:layout_height="786dp"
         android:orientation="vertical"
         android:background="@color/colorPrimary"
-        android:weightSum="1">
+        android:weightSum="100">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="130dp">
+            android:layout_weight="20"
+            android:gravity="center"
+            android:weightSum="10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginLeft="0dp"
+               android:layout_weight="7"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
                 android:id="@+id/SCAN_PROFILE"
-                android:layout_weight="0.17"
                 android:scaleType="centerCrop" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
+            android:layout_weight="20"
+            android:weightSum="100"
             android:orientation="horizontal">
 
             <TextView
+                android:layout_weight="50"
+                android:gravity="center"
                 android:layout_marginTop="20dp"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:textColor="#ffff"
                 android:textSize="19sp"
                 android:layout_height="wrap_content"
@@ -44,7 +49,8 @@
 
             <TextView
                 android:layout_marginTop="20dp"
-                android:layout_width="wrap_content"
+                android:layout_weight="50"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Name goes here"
@@ -56,21 +62,24 @@
 
 
         <LinearLayout
+            android:layout_weight="20"
+            android:weightSum="100"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-
-                android:layout_width="wrap_content"
+                android:layout_weight="50.13"
+                android:gravity="center"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Address"
                 android:textSize="17sp"
                 android:textColor="#ffff"/>
 
             <TextView
-                android:layout_marginTop="0dp"
-                android:layout_width="wrap_content"
+                android:layout_weight="50"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Address"
                 android:gravity="center"
@@ -82,19 +91,24 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_weight="20"
+            android:weightSum="100"
             android:layout_marginTop="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_weight="56.81"
+                android:gravity="center"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Mobile"
-                android:textSize="19sp"
+                android:textSize="18sp"
                 android:textColor="#ffff"/>
 
             <TextView
+                android:layout_weight="50"
                 android:layout_marginTop="0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -106,12 +120,16 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_weight="20"
+            android:weightSum="100"
             android:layout_marginTop="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
+                android:layout_weight="37.42"
+                android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ID number"
@@ -119,8 +137,8 @@
                 android:textColor="#ffff"/>
 
             <TextView
-                android:layout_marginTop="0dp"
-                android:layout_width="wrap_content"
+                android:layout_weight="62.58"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="id_no"
                 android:gravity="center"
@@ -133,19 +151,24 @@
 
         <LinearLayout
             android:layout_marginTop="40dp"
+            android:layout_weight="20"
+            android:weightSum="100"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_weight="52.08"
+                android:gravity="center"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="ID Source"
                 android:textSize="17sp"
                 android:textColor="#ffff"/>
 
             <TextView
+                android:layout_weight="44.51"
                 android:layout_marginTop="0dp"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="id_no"
                 android:gravity="center"
@@ -157,39 +180,48 @@
         </LinearLayout>
 
 
-
         <LinearLayout
+            android:layout_weight="20"
+            android:weightSum="100"
             android:layout_marginTop="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_weight="50.52"
+                android:gravity="center"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Purpose of visit"
                 android:textSize="15sp"
-                android:textColor="#ffff"/>
+                android:textColor="#ffff"
+                android:id="@+id/textView3" />
 
             <TextView
                 android:layout_marginTop="0dp"
-                android:layout_width="wrap_content"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Pupose"
-                android:gravity="center"
                 android:textColor="#ffff"
                 android:id="@+id/SCAN_REASON"
                 android:layout_marginLeft="20dp"/>
         </LinearLayout>
 
         <LinearLayout
+            android:layout_weight="20"
+            android:weightSum="100"
             android:layout_marginTop="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_weight="50.52"
+                android:gravity="center"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Date of journey"
                 android:textSize="15sp"
@@ -197,10 +229,11 @@
 
             <TextView
                 android:layout_marginTop="0dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pupose"
+                android:layout_weight="50"
                 android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="DOJ"
                 android:textColor="#ffff"
                 android:id="@+id/SCAN_DOJ"
                 android:layout_marginLeft="20dp"/>
@@ -209,20 +242,25 @@
 
         <LinearLayout
             android:layout_marginTop="40dp"
+            android:layout_weight="20"
+            android:weightSum="100"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Date of birth"
                 android:textSize="15sp"
                 android:textColor="#ffff"/>
 
             <TextView
+                android:layout_weight="50"
                 android:layout_marginTop="0dp"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Date of birth"
                 android:gravity="center"
@@ -232,21 +270,26 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_weight="20"
+            android:weightSum="100"
             android:layout_marginTop="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Driver Name"
                 android:textSize="15sp"
                 android:textColor="#ffff"/>
 
             <TextView
+                android:layout_weight="50"
                 android:layout_marginTop="0dp"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Driver Name"
                 android:gravity="center"
@@ -256,13 +299,17 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_weight="20"
+            android:weightSum="100"
             android:layout_marginTop="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Car number"
                 android:textSize="15sp"
@@ -270,8 +317,9 @@
                 android:id="@+id/textView2" />
 
             <TextView
+                android:layout_weight="50"
                 android:layout_marginTop="0dp"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Car Number"
                 android:gravity="center"
@@ -284,15 +332,17 @@
 
 
         <RelativeLayout
+            android:layout_weight="100"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="260dp"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
                 android:layout_centerHorizontal="true"
-                android:layout_height="260dp"
+                android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:id="@+id/SCAN_PIC"/>
 
@@ -303,6 +353,8 @@
 
         <LinearLayout
             android:layout_marginTop="40dp"
+            android:layout_weight="20"
+            android:weightSum="100"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -336,16 +388,15 @@
         </LinearLayout>
 
         <RelativeLayout
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <ImageView
                 android:layout_centerHorizontal="true"
                 android:layout_width="match_parent"
+                android:layout_margin="20dp"
                 android:id="@+id/BAR_CODE_SHOW"
-                android:layout_height="100dp" />
+                android:layout_height="wrap_content" />
             <TextView
                 android:layout_width="250dp"
                 android:text="Hellos sdsdsdsdsdsdsds"
@@ -377,7 +428,6 @@
                     android:enabled="false"
                     android:id="@+id/vehicle"
                     android:textColor="#000000"
-                    android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

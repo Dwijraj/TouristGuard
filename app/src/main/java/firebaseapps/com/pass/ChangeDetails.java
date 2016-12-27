@@ -64,6 +64,7 @@ public class ChangeDetails extends AppCompatActivity {
             .clientId(PayPalConfig.PAYPAL_CLIENT_ID);
 
     public void onDestroy() {
+        Passdetails.THE_TEST=0;
         stopService(new Intent(this, PayPalService.class));
         super.onDestroy();
         N=400;

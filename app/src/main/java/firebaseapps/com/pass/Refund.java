@@ -22,6 +22,13 @@ public class Refund extends AppCompatActivity {
     private  DatabaseReference databaseReferenceRefund;
     private DatabaseReference mDatabaseref;
     private DatabaseReference MAIN_ROOT;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Passdetails.THE_TEST=0;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

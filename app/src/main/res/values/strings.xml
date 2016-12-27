@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Pass</string>
-    <string name="get_started">GET STARTED</string>
     <string name="enter_phone_number">Enter phone number</string>
     <string name="apply_for_a_pass">APPLY FOR A PASS</string>
     <string name="Name">Name</string>

@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:weightSum="130"
     android:background="@color/colorPrimary"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
     <ImageView
         android:layout_marginTop="10dp"
+        android:layout_weight="40"
         android:layout_width="match_parent"
         android:src="@drawable/govt"
-        android:layout_height="100dp"
+        android:layout_height="0dp"
         android:padding="9dp"
-        android:id="@+id/imageView" />
+        android:id="@+id/imageView"
+        tools:ignore="ContentDescription" />
 
     <LinearLayout
+        android:layout_weight="80"
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp">
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView android:id="@+id/splashscreen"
+        <ImageView
+            android:id="@+id/splashscreen"
             android:layout_width="wrap_content"
-            android:layout_height="298dp"
-            android:padding="10dp"
+            android:layout_height="wrap_content"
             android:src="@drawable/tourist_pass"
             android:layout_gravity="center"/>
 
@@ -36,6 +34,7 @@
 
 
     <LinearLayout
+        android:layout_weight="10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

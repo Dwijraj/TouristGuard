@@ -10,10 +10,7 @@
         android:layout_height="wrap_content">
 
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -36,19 +33,21 @@
                     android:layout_marginTop="23dp"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
+                    android:weightSum="100"
                     android:gravity="start"
                     android:layout_height="wrap_content">
 
                     <TextView
                         android:textColor="#ffff"
                         android:gravity="start"
-                        android:textSize="16dp"
+                        android:textSize="15sp"
+                        android:layout_weight="5"
                         android:layout_width="wrap_content"
-                        android:text="Passenger  Pass Number  1 "
+                        android:text=" Pass Number  1 "
                         android:layout_height="wrap_content" />
                     <EditText
-                        android:layout_width="match_parent"
-                        android:minWidth="173dp"
+                        android:layout_weight="95"
+                        android:layout_width="0dp"
                         android:id="@+id/pass1"
                         android:background="#ffff"
                         android:layout_height="wrap_content" />
@@ -62,18 +61,21 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:gravity="start"
+                    android:weightSum="100"
                     android:layout_height="wrap_content">
+
 
                     <TextView
                         android:textColor="#ffff"
                         android:gravity="start"
-                        android:textSize="16dp"
+                        android:textSize="15sp"
+                        android:layout_weight="5"
                         android:layout_width="wrap_content"
-                        android:text="Passenger  Pass Number  2 "
+                        android:text="Pass Number  2 "
                         android:layout_height="wrap_content" />
                     <EditText
-                        android:layout_width="match_parent"
-                        android:minWidth="173dp"
+                        android:layout_weight="95"
+                        android:layout_width="0dp"
                         android:id="@+id/pass2"
                         android:background="#ffff"
                         android:layout_height="wrap_content" />
@@ -87,22 +89,24 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:gravity="start"
+                    android:weightSum="100"
                     android:layout_height="wrap_content">
 
                     <TextView
                         android:textColor="#ffff"
                         android:gravity="start"
-                        android:textSize="16dp"
+                        android:textSize="15sp"
+                        android:layout_weight="5"
                         android:layout_width="wrap_content"
-                        android:text="Passenger  Pass Number  3 "
+                        android:text="Pass Number  3 "
                         android:layout_height="wrap_content" />
+
                     <EditText
-                        android:layout_width="match_parent"
-                        android:minWidth="173dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="95"
                         android:id="@+id/pass3"
                         android:background="#ffff"
                         android:layout_height="wrap_content" />
-
 
 
                 </LinearLayout>
@@ -113,18 +117,20 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:gravity="start"
+                    android:weightSum="100"
                     android:layout_height="wrap_content">
 
                     <TextView
                         android:textColor="#ffff"
                         android:gravity="start"
-                        android:textSize="16dp"
+                        android:textSize="15sp"
+                        android:layout_weight="5"
                         android:layout_width="wrap_content"
-                        android:text="Passenger  Pass Number  4 "
+                        android:text="Pass Number  4 "
                         android:layout_height="wrap_content" />
                     <EditText
-                        android:layout_width="match_parent"
-                        android:minWidth="173dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="95"
                         android:id="@+id/pass4"
                         android:background="#ffff"
                         android:layout_height="wrap_content" />
@@ -166,7 +172,7 @@
 
 
 
-        </HorizontalScrollView>
+
 
 
 

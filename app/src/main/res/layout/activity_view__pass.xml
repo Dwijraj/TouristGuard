@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:textColor="#ffff"
             android:gravity="center"
-            android:singleLine="true"
+           android:maxLines="1"
             android:id="@+id/view_pass_passno."
             android:hint="Enter transaction id."
             android:textColorHint="#ffff"

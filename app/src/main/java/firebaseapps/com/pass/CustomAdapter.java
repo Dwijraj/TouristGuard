@@ -42,7 +42,14 @@ public class CustomAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflter.inflate(R.layout.test, null);
         TextView names = (TextView) view.findViewById(R.id.textView);
-        names.setText(countryNames[i]);
+        if(i==0)
+        {
+            names.setText("Tap to select ID proof source");
+        }
+        else
+        {
+            names.setText(countryNames[i]);
+        }
         return view;
     }
 }

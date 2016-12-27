@@ -41,11 +41,7 @@ public class ViewPass extends AppCompatActivity {
     private  Application app;
     private TextView ID_source;
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
 
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

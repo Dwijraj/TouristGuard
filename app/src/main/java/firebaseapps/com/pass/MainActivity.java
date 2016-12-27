@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    private LinearLayout OTPIDS;
     private EditText OTPS;
     private EditText Phone;
     private FirebaseAuth mAuth;
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        OTPIDS=(LinearLayout) findViewById(R.id.OTPID);
         rxConnect=new RxConnect(MainActivity.this);
         rxConnect.setCachingEnabled(false);
         OTPDatabase=FirebaseDatabase.getInstance().getReference().child("OTP");
@@ -112,15 +115,17 @@ public class MainActivity extends AppCompatActivity {
                     final String PASSWORD = IMEI;
                     buttons.setText("GET STARTED");
                     OTPS.setVisibility(View.VISIBLE);
+                    Phone.setEnabled(false);
+                    OTPIDS.setVisibility(View.VISIBLE);
 
                     Random rn = new Random();
                     int n = 999 - 99;
                     int i = rn.nextInt() % n;
-                    OTPint=  99 + i;
-                    if(OTPint<0)
+                    if(i<0)
                     {
-                        OTPint*=-1;
+                        i*=-1;
                     }
+                    OTPint=  99 + i;
                     OTPstring=String.valueOf(OTPint);
                     Log.v("OTP",OTPstring);
 
