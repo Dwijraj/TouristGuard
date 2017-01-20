@@ -113,10 +113,10 @@ public class MainActivity extends AppCompatActivity {
                     //  final String IMEI = "455567888344432";
                     final String EMAIL = IMEI + "@" + IMEI + ".com";
                     final String PASSWORD = IMEI;
-                    buttons.setText("GET STARTED");
+                   /* buttons.setText("GET STARTED");
                     OTPS.setVisibility(View.VISIBLE);
                     Phone.setEnabled(false);
-                    OTPIDS.setVisibility(View.VISIBLE);
+                    OTPIDS.setVisibility(View.VISIBLE); */
 
                     Random rn = new Random();
                     int n = 999 - 99;
@@ -141,19 +141,26 @@ public class MainActivity extends AppCompatActivity {
                             rxConnect.setParam("senderid","INFOSM");
                             rxConnect.setParam("accusage","1");
                             rxConnect.execute(URL,RxConnect.GET, new RxConnect.RxResultHelper() {
+
+
                                 @Override
                                 public void onResult(String result) {
                                     //do something on result
 
-                                   // Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
 
+                                    Toast.makeText(getApplicationContext(),"OTP sent ",Toast.LENGTH_SHORT).show();
+
+                                    buttons.setText("GET STARTED");
+                                    OTPS.setVisibility(View.VISIBLE);
+                                    Phone.setEnabled(false);
+                                    OTPIDS.setVisibility(View.VISIBLE);
                                 }
 
                                 @Override
                                 public void onNoResult() {
                                     //do something
 
-                                  //  Toast.makeText(getApplicationContext(),"Posted no Result",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"OTP could not be sent",Toast.LENGTH_SHORT).show();
 
 
                                 }
@@ -162,10 +169,11 @@ public class MainActivity extends AppCompatActivity {
                                 public void onError(Throwable throwable) {
                                     //do somenthing on error
 
-//                                    Toast.makeText(getApplicationContext(),throwable.getMessage(),Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"OTP could not be sent",Toast.LENGTH_SHORT).show();
 
 
                                 }
+
 
                             });
 
@@ -258,6 +266,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+                            }
+                            else if( OTPS.getVisibility()== View.INVISIBLE)
+                            {
+
+                                Toast.makeText(getApplicationContext(),"OTP couldn't be sent ensure internet connection",Toast.LENGTH_SHORT).show();
 
                             }
                             else if(OTP_INPUT.isEmpty())

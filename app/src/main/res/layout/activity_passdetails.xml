@@ -39,7 +39,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Click to black patch to upload profile photo"
+                    android:text="Tap on black patch to upload profile photo"
                     android:id="@+id/clicktouploadprofilephoto"
                     android:textColor="#fff"
                     android:layout_centerHorizontal="true"
@@ -417,7 +417,7 @@
                     android:layout_weight="40"
                     android:weightSum="100"
                     android:layout_width="0dp"
-
+                    android:layout_margin="2dp"
                     android:layout_height="wrap_content">
 
                     <TextView
@@ -441,7 +441,7 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
-                        android:layout_marginLeft="20dp"
+
                         android:layout_width="50dp"
                         android:layout_gravity="start"
                         android:id="@+id/DOJDate"

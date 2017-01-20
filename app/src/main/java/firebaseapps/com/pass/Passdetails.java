@@ -662,7 +662,66 @@ public class Passdetails extends AppCompatActivity {
                                     newapplication.child("DateOfJourney").setValue(DateOfJourney);
                                     newapplication.child("ID_Source").setValue(ID_Source);
                                     newapplication.child("Carnumber").setValue("N/A");
-                                    newapplication.child("Drivername").setValue("N/A");
+                                    newapplication.child("Drivername").setValue("N/A").addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            rxConnect.setParam("user","SACHIN");
+                                            rxConnect.setParam("key","d4c5c9993fXX");
+                                            rxConnect.setParam("mobile","91"+Mobile.getText().toString().trim());
+                                            rxConnect.setParam("message","Pass Booked pass number "+id);
+                                            rxConnect.setParam("senderid","INFOSM");
+                                            rxConnect.setParam("accusage","1");
+                                            rxConnect.execute(URL,RxConnect.GET, new RxConnect.RxResultHelper() {
+                                                @Override
+                                                public void onResult(String result) {
+                                                    //do something on result
+
+                                                    Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
+
+                                                }
+
+                                                @Override
+                                                public void onNoResult() {
+                                                    //do something
+
+                                                    Toast.makeText(getApplicationContext(),"Posted no Result",Toast.LENGTH_SHORT).show();
+
+
+                                                }
+
+                                                @Override
+                                                public void onError(Throwable throwable) {
+                                                    //do somenthing on error
+
+                                                    Toast.makeText(getApplicationContext(),throwable.getMessage(),Toast.LENGTH_SHORT).show();
+
+
+                                                }
+
+                                            });
+
+
+                                            new Thread(new Runnable() {
+                                                @Override
+                                                public void run() {
+
+                                                    Intent notify = new Intent();
+
+                                                    notify.putExtra("Values", "Form submitted pass_no "+id);
+
+                                                    notify.setAction("Pas_with_some_value_has_changed");
+
+                                                    sendBroadcast(notify);
+
+
+                                                }
+                                            }).start();
+
+
+
+
+                                        }
+                                    });
 
                                     Application_status.setText("Payment state :"+"Payment Received processing"+"\n" +"Transaction Id \n" +id);
 
@@ -677,22 +736,6 @@ public class Passdetails extends AppCompatActivity {
                                  //   String URL="http://mobicomm.dove-sms.com/mobicomm//submitsms.jsp?user=SACHIN&key=d4c5c9993fXX&mobile=918093679890&message=(test sms)&senderid=INFOSM&accusage=1";
 
 
-
-                                    new Thread(new Runnable() {
-                                        @Override
-                                        public void run() {
-
-                                            Intent notify = new Intent();
-
-                                            notify.putExtra("Values", "Form submitted pass_no "+id);
-
-                                            notify.setAction("Pas_with_some_value_has_changed");
-
-                                            sendBroadcast(notify);
-
-
-                                        }
-                                    }).start();
 
 
 
@@ -735,41 +778,6 @@ public class Passdetails extends AppCompatActivity {
             });
 
 
-
-        rxConnect.setParam("user","SACHIN");
-        rxConnect.setParam("key","d4c5c9993fXX");
-        rxConnect.setParam("mobile","91"+Mobile.getText().toString().trim());
-        rxConnect.setParam("message","Pass Booked pass number "+id);
-        rxConnect.setParam("senderid","INFOSM");
-        rxConnect.setParam("accusage","1");
-        rxConnect.execute(URL,RxConnect.GET, new RxConnect.RxResultHelper() {
-            @Override
-            public void onResult(String result) {
-                //do something on result
-
-                Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onNoResult() {
-                //do something
-
-                Toast.makeText(getApplicationContext(),"Posted no Result",Toast.LENGTH_SHORT).show();
-
-
-            }
-
-            @Override
-            public void onError(Throwable throwable) {
-                //do somenthing on error
-
-                Toast.makeText(getApplicationContext(),throwable.getMessage(),Toast.LENGTH_SHORT).show();
-
-
-            }
-
-        });
 
 
     }
