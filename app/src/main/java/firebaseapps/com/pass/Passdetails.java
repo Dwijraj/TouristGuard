@@ -77,6 +77,10 @@ import mohitbadwal.rxconnect.RxConnect;
 
 //http://mobicomm.dove-sms.com/mobicomm//submitsms.jsp?user=SACHIN&key=d4c5c9993fXX&mobile=91(9437510178)&message=(test sms)&senderid=INFOSM&accusage=1
 
+/** MINOR BUG FIXES IMAGE VIEW IN SCAN_ID CANT PUT BIG IMAGES **/
+
+
+
 public class Passdetails extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -122,8 +126,11 @@ public class Passdetails extends AppCompatActivity {
     private String state;
     private String ID_Source;
     private int flag;
+    private TextView PLACE_OF_VISIT;
     private Spinner spinner;
     private String id;
+    private String PLACE=null;
+    private Spinner PLACES_SPINNER;
     public static final int PAYPAL_REQUEST_CODE = 123;
   //  private AwesomeValidation mAwesomeValidation;
     public static int THE_TEST=0;
@@ -131,8 +138,10 @@ public class Passdetails extends AppCompatActivity {
     String URL="http://mobicomm.dove-sms.com/mobicomm/submitsms.jsp";//?user=SACHIN&key=d4c5c9993fXX&mobile=918093679890&message=(test sms)&senderid=INFOSM&accusage=1";
     private DatePicker datePicker;
     private static  final String[]paths = {"","Passport", "Driving License", "Adhar Card","PAN"};
+    private static final  String[] PLACES={"","1","2","3"};
     private Calendar calendar;
     private int mDay, mMonth ,mYear;
+    private DatabaseReference REFUND;
     //Paypal Configuration Object
     private static PayPalConfiguration config = new PayPalConfiguration()
             // Start with mock environment.  When ready, switch to sandbox (ENVIRONMENT_SANDBOX)
@@ -158,6 +167,9 @@ public class Passdetails extends AppCompatActivity {
 
         dialog=new Dialog(Passdetails.this);
 
+        PLACE_OF_VISIT=(TextView) findViewById(R.id.PLACE_OF_VISITS);
+        PLACES_SPINNER=(Spinner) findViewById(R.id.spinnerPlaces);
+        REFUND=FirebaseDatabase.getInstance().getReference().child("ToRefund");
         ERROR_DATE=(LinearLayout)findViewById(R.id.DATE_ERROR);
         ERROR_MOBILE=(LinearLayout)findViewById(R.id.MOBILE_ERROR);
         ERROR_NAME=(LinearLayout)findViewById(R.id.NAME_ERROR);
@@ -200,6 +212,11 @@ public class Passdetails extends AppCompatActivity {
         spinner.setAdapter(customAdapter);
         spinner.setPrompt("Select The source");
 
+        CustomAdapter customAdapter1=new CustomAdapter(getApplicationContext(),PLACES);
+        PLACES_SPINNER.setAdapter(customAdapter1);
+
+
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -213,9 +230,29 @@ public class Passdetails extends AppCompatActivity {
 
             }
         });
-       //adding validation to edittexts
-        //mAwesomeValidation.addValidation(Passdetails.this, R.id.name,  "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.err_name);
 
+        PLACES_SPINNER.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int positiond, long id) {
+
+                if(positiond!=0)
+                {
+
+
+                    PLACE=PLACES[positiond];
+                    PLACE_OF_VISIT.setText(PLACES[positiond]);
+
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+
+            }
+        });
 
 
 
@@ -259,10 +296,26 @@ public class Passdetails extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+                if(s.length()==0)
+                {
+                    if(ERROR_MOBILE.getVisibility()== View.VISIBLE)
+                    {
+                        ERROR_MOBILE.setVisibility(View.INVISIBLE);
+                    }
+                }
+
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(s.length()==0)
+                {
+                    if(ERROR_MOBILE.getVisibility()== View.VISIBLE)
+                    {
+                        ERROR_MOBILE.setVisibility(View.INVISIBLE);
+                    }
+                }
 
             }
 
@@ -277,6 +330,13 @@ public class Passdetails extends AppCompatActivity {
                     }
 
                 }
+                else if(s.length()==0)
+                {
+                    if(ERROR_MOBILE.getVisibility()== View.VISIBLE)
+                    {
+                        ERROR_MOBILE.setVisibility(View.INVISIBLE);
+                    }
+                }
                 else
                 {
                     if(ERROR_MOBILE.getVisibility()== View.VISIBLE)
@@ -287,13 +347,6 @@ public class Passdetails extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
-
         DOJDate.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -459,7 +512,7 @@ public class Passdetails extends AppCompatActivity {
 
                    // if(mAwesomeValidation.validate())
                   //  {
-                        if(  !( ID_Source.equals("Tap to select ID proof source") ||  TextUtils.isEmpty(Names) || TextUtils.isEmpty(Addresses) || TextUtils.isEmpty(DateOfJourney) || TextUtils.isEmpty(DateOfBirth) || TextUtils.isEmpty(Mobiles) || TextUtils.isEmpty(ID_NO) || TextUtils.isEmpty(Purposes) || TextUtils.isEmpty(byteArray.toString()) || TextUtils.isEmpty(scaniduri.toString()) )
+                        if(  !( ID_Source.contains("Tap") || TextUtils.isEmpty(PLACE) ||  TextUtils.isEmpty(Names) || TextUtils.isEmpty(Addresses) || TextUtils.isEmpty(DateOfJourney) || TextUtils.isEmpty(DateOfBirth) || TextUtils.isEmpty(Mobiles) || TextUtils.isEmpty(ID_NO) || TextUtils.isEmpty(Purposes) || TextUtils.isEmpty(byteArray.toString()) || TextUtils.isEmpty(scaniduri.toString()) )
                                 &&ERROR_NAME.getVisibility()==View.INVISIBLE&&ERROR_MOBILE.getVisibility()==View.INVISIBLE&&ERROR_DATE.getVisibility()==View.INVISIBLE)
                         {
                             UNAVAILABLE_DATES.addValueEventListener(new ValueEventListener() {
@@ -506,6 +559,13 @@ public class Passdetails extends AppCompatActivity {
                                 {
 
                                     Toast.makeText(getApplicationContext(),"Please enter valid Date",Toast.LENGTH_SHORT).show();
+                                }
+                                else if(PLACE==null)
+                                {
+
+                                    Toast.makeText(getApplicationContext(),"Please select destination",Toast.LENGTH_SHORT).show();
+
+
                                 }
 
 
@@ -604,13 +664,13 @@ public class Passdetails extends AppCompatActivity {
     private void SubmitApplication() {
 
 
-        try {
+      /*  try {
             Profile.setImageBitmap(bitmap_BAR_CODE);
         }
         catch (Exception e)
         {
                 Toast.makeText(getApplicationContext(),"Can't be generated",Toast.LENGTH_SHORT).show();
-        }
+        } */
 
 
 
@@ -660,8 +720,10 @@ public class Passdetails extends AppCompatActivity {
                                     newapplication.child("ApplicationStatus").setValue("Payment Received");
                                     newapplication.child("DateOfBirth").setValue(DateOfBirth);
                                     newapplication.child("DateOfJourney").setValue(DateOfJourney);
+                                    newapplication.child("Destination").setValue(PLACE);
                                     newapplication.child("ID_Source").setValue(ID_Source);
                                     newapplication.child("Carnumber").setValue("N/A");
+                                    newapplication.child("Gate").setValue("N/A");
                                     newapplication.child("Drivername").setValue("N/A").addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
@@ -670,7 +732,7 @@ public class Passdetails extends AppCompatActivity {
                                             rxConnect.setParam("mobile","91"+Mobile.getText().toString().trim());
                                             rxConnect.setParam("message","Pass Booked pass number "+id);
                                             rxConnect.setParam("senderid","INFOSM");
-                                            rxConnect.setParam("accusage","1");
+                                            rxConnect.setParam("accusage","2");
                                             rxConnect.execute(URL,RxConnect.GET, new RxConnect.RxResultHelper() {
                                                 @Override
                                                 public void onResult(String result) {
@@ -721,6 +783,11 @@ public class Passdetails extends AppCompatActivity {
 
 
                                         }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            REFUND.child(id).setValue("FAILED FORM SUBMISSION MAKE REFUND");
+                                        }
                                     });
 
                                     Application_status.setText("Payment state :"+"Payment Received processing"+"\n" +"Transaction Id \n" +id);
@@ -735,20 +802,9 @@ public class Passdetails extends AppCompatActivity {
 
                                  //   String URL="http://mobicomm.dove-sms.com/mobicomm//submitsms.jsp?user=SACHIN&key=d4c5c9993fXX&mobile=918093679890&message=(test sms)&senderid=INFOSM&accusage=1";
 
-
-
-
-
-
-
-
                                     Payment.setEnabled(false);
                                     Transaction_Id.setText(id);
                                     Transaction_Id.setEnabled(true);
-
-
-
-
 
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
@@ -761,6 +817,7 @@ public class Passdetails extends AppCompatActivity {
                                     Application_status.setText("Form submission unsuccessful please ensure net connection and try again");
                                     mDialog.dismiss();
                                     Toast.makeText(getApplicationContext(),"Form submission not successfull"+e.toString(),Toast.LENGTH_SHORT).show();
+                                    REFUND.child(id).setValue("FAILED FORM SUBMISSION MAKE REFUND");
                                 }
                             });
 
@@ -771,6 +828,7 @@ public class Passdetails extends AppCompatActivity {
 
                             mDialog.dismiss();
                             Toast.makeText(getApplicationContext(),"Form submission not successfull"+e.toString(),Toast.LENGTH_SHORT).show();
+                            REFUND.child(id).setValue("FAILED FORM SUBMISSION MAKE REFUND");
                         }
                     });
 

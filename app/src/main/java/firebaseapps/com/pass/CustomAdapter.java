@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class CustomAdapter extends BaseAdapter {
@@ -42,12 +43,14 @@ public class CustomAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflter.inflate(R.layout.test, null);
         TextView names = (TextView) view.findViewById(R.id.textView);
+        ImageView Image =(ImageView) view.findViewById(R.id.IMAGE_VIEW_SELECT);
         if(i==0)
         {
-            names.setText("Tap to select ID proof source");
+            names.setText("Tap to select");
         }
         else
         {
+            Image.setVisibility(View.INVISIBLE);
             names.setText(countryNames[i]);
         }
         return view;

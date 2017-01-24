@@ -23,25 +23,30 @@ public class Application {
   public String ID_Source;
     public String Carnumber;
     public String Drivername;
+    public String Gate;
+    public String Destination;
 
-    public Application(String name, String address, String mobile, String ID_No, String purpose, String applicantPhoto, String applicantScanId, String uid, String applicationStatus, String dateOfBirth, String dateOfJourney,String barcode_Image,String id_source,String Carnumber,String Drivername) {
+
+    public Application() {
+    }
+
+    public Application(String name, String address, String mobile, String ID_No, String purpose, String applicantPhoto, String applicantScanId, String uid, String applicationStatus, String dateOfBirth, String dateOfJourney, String barcode_Image, String ID_Source, String carnumber, String drivername, String gate, String destination) {
         Name = name;
         Address = address;
         Mobile = mobile;
-        Barcode_Image=barcode_Image;
         this.ID_No = ID_No;
         Purpose = purpose;
         ApplicantPhoto = applicantPhoto;
         ApplicantScanId = applicantScanId;
         Uid = uid;
-        this.Carnumber=Carnumber;
-        this.Drivername=Drivername;
-        ID_Source=id_source;
         ApplicationStatus = applicationStatus;
         DateOfBirth = dateOfBirth;
         DateOfJourney = dateOfJourney;
-    }
-
-    public Application() {              //Important or else the app crashes firebase requires a datamodel class with default constructor
+        Barcode_Image = barcode_Image;
+        this.ID_Source = ID_Source;
+        Carnumber = carnumber;
+        Drivername = drivername;
+        Gate = gate;
+        Destination = destination;
     }
 }

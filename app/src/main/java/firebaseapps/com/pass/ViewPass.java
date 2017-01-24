@@ -40,6 +40,8 @@ public class ViewPass extends AppCompatActivity {
     private DatabaseReference ApplicationRef2;
     private  Application app;
     private TextView ID_source;
+    private TextView Gate;
+    private TextView place_of_visit;
 
 
 
@@ -50,6 +52,8 @@ public class ViewPass extends AppCompatActivity {
             finish();
         setContentView(R.layout.pass_history);
 
+        place_of_visit=(TextView) findViewById(R.id.place);
+        Gate=(TextView) findViewById(R.id.GATE);
         CarNumber=(TextView)findViewById(R.id.Carnumbers);
         DriverName=(TextView)findViewById(R.id.DriverNAME);
       final  ImageView imageView=(ImageView) findViewById(R.id.BAR_CODE_SHOW);
@@ -104,6 +108,8 @@ public class ViewPass extends AppCompatActivity {
                 ID_source.setText(app.ID_Source);
                 CarNumber.setText(app.Carnumber);
                 DriverName.setText(app.Drivername);
+                Gate.setText(app.Gate);
+                place_of_visit.setText(app.Destination);
 
                 if(app.ApplicationStatus.contains("Verified"))
                 {

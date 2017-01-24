@@ -152,6 +152,66 @@
 
                 </LinearLayout>
           </LinearLayout>
+
+            <LinearLayout
+                android:weightSum="100"
+                android:baselineAligned="false"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_weight="20"
+                    android:weightSum="100"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_weight="100"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Place of visit :"
+                        android:textSize="15sp"
+                        android:textColor="#ffff"
+                        android:id="@+id/textView4" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="80"
+                    android:layout_width="0dp"
+                    android:weightSum="100"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_weight="40"
+                        android:textColor="#ffff"
+                        android:gravity="center"
+                        android:text="PLACE OF VISIT"
+                        android:id="@+id/PLACE_OF_VISITS"
+                        android:layout_height="0dp" />
+
+
+                    <Spinner
+
+                        android:gravity="start"
+                        android:layout_gravity="center"
+                        android:id="@+id/spinnerPlaces"
+                        android:background="#ffff"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:minHeight="50dp"
+                        android:layout_weight="60"/>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
             <LinearLayout
                 android:weightSum="100"
                 android:baselineAligned="false"
@@ -176,6 +236,8 @@
                       android:textColor="#ffff"/>
 
               </LinearLayout>
+
+
 
               <LinearLayout
                   android:layout_weight="70"
@@ -270,7 +332,6 @@
                             android:layout_height="0dp"
                             android:minHeight="50dp"
                             android:layout_weight="40"/>
-
 
 
                     </LinearLayout>

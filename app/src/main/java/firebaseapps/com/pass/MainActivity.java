@@ -127,8 +127,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                     OTPint=  99 + i;
                     OTPstring=String.valueOf(OTPint);
-                    Log.v("OTP",OTPstring);
+//                    Log.v("OTP",OTPstring);
 
+                    Toast.makeText(getApplicationContext(),"YOUR OTP IS "+OTPstring,Toast.LENGTH_SHORT ).show();
 
                     new Thread(new Runnable() {
                         @Override
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                             rxConnect.setParam("mobile","91"+IMEI);
                             rxConnect.setParam("message","Your OTP is "+OTPstring);
                             rxConnect.setParam("senderid","INFOSM");
-                            rxConnect.setParam("accusage","1");
+                            rxConnect.setParam("accusage","2");
                             rxConnect.execute(URL,RxConnect.GET, new RxConnect.RxResultHelper() {
 
 
