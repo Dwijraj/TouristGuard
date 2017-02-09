@@ -5,12 +5,16 @@ package firebaseapps.com.pass;
  */
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import static firebaseapps.com.pass.R.*;
+import static firebaseapps.com.pass.R.color.HintColor;
 
 public class CustomAdapter extends BaseAdapter {
     Context context;
@@ -41,12 +45,13 @@ public class CustomAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = inflter.inflate(R.layout.test, null);
-        TextView names = (TextView) view.findViewById(R.id.textView);
-        ImageView Image =(ImageView) view.findViewById(R.id.IMAGE_VIEW_SELECT);
+        view = inflter.inflate(layout.test, null);
+        TextView names = (TextView) view.findViewById(id.textView);
+        ImageView Image =(ImageView) view.findViewById(id.IMAGE_VIEW_SELECT);
         if(i==0)
         {
             names.setText("Tap to select");
+            names.setTextColor(Color.GRAY);
         }
         else
         {

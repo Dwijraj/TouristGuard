@@ -119,6 +119,7 @@ public class Passdetails extends AppCompatActivity {
     private DatabaseReference ApplicationRef;
     private DatabaseReference User_app_ref;
     private DatabaseReference UNAVAILABLE_DATES;
+    private DatabaseReference PRICE_OF_PLACE;
     private StorageReference ApplicationStorageRef;
     private RxConnect rxConnect;
     //For PayPal Parts
@@ -167,6 +168,8 @@ public class Passdetails extends AppCompatActivity {
 
         dialog=new Dialog(Passdetails.this);
 
+        PRICE_OF_PLACE=FirebaseDatabase.getInstance().getReference();
+        PRICE_OF_PLACE.keepSynced(true);
         PLACE_OF_VISIT=(TextView) findViewById(R.id.PLACE_OF_VISITS);
         PLACES_SPINNER=(Spinner) findViewById(R.id.spinnerPlaces);
         REFUND=FirebaseDatabase.getInstance().getReference().child("ToRefund");
@@ -214,6 +217,7 @@ public class Passdetails extends AppCompatActivity {
 
         CustomAdapter customAdapter1=new CustomAdapter(getApplicationContext(),PLACES);
         PLACES_SPINNER.setAdapter(customAdapter1);
+
 
 
 
@@ -513,7 +517,8 @@ public class Passdetails extends AppCompatActivity {
                    // if(mAwesomeValidation.validate())
                   //  {
                         if(  !( ID_Source.contains("Tap") || TextUtils.isEmpty(PLACE) ||  TextUtils.isEmpty(Names) || TextUtils.isEmpty(Addresses) || TextUtils.isEmpty(DateOfJourney) || TextUtils.isEmpty(DateOfBirth) || TextUtils.isEmpty(Mobiles) || TextUtils.isEmpty(ID_NO) || TextUtils.isEmpty(Purposes) || TextUtils.isEmpty(byteArray.toString()) || TextUtils.isEmpty(scaniduri.toString()) )
-                                &&ERROR_NAME.getVisibility()==View.INVISIBLE&&ERROR_MOBILE.getVisibility()==View.INVISIBLE&&ERROR_DATE.getVisibility()==View.INVISIBLE)
+                                &&ERROR_NAME.getVisibility()==View.INVISIBLE&&ERROR_MOBILE.getVisibility()==View.INVISIBLE&&
+                                ERROR_DATE.getVisibility()==View.INVISIBLE)
                         {
                             UNAVAILABLE_DATES.addValueEventListener(new ValueEventListener() {
                                 @Override
@@ -529,8 +534,21 @@ public class Passdetails extends AppCompatActivity {
                                     }
                                     else
                                     {
-                                        getPayment();
-                                    }
+                                        PRICE_OF_PLACE.child("Prices").child(PLACE).addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                                                getPayment(dataSnapshot.getValue(String.class));
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+                                        });
+}
 
                                 }
                                 @Override
@@ -637,9 +655,9 @@ public class Passdetails extends AppCompatActivity {
     }
 
 
-    private void getPayment() {
+    private void getPayment(String cost) {
         //Getting the amount from editText
-        paymentAmount = "9.00";
+        paymentAmount = cost;
 
         //Creating a paypalpayment
         PayPalPayment payment = new PayPalPayment(new BigDecimal(String.valueOf(paymentAmount)), "USD", "Pass Fee",
