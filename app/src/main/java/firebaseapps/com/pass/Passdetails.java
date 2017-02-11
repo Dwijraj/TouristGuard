@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 
 import android.net.Uri;
 
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -49,6 +51,7 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.encoder.QRCode;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
@@ -61,6 +64,9 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 
 import java.text.SimpleDateFormat;
@@ -92,7 +98,7 @@ public class Passdetails extends AppCompatActivity {
     private final int SCAN_ID=12241;            //To recognise in onActivityResult
     private EditText Name;
     private byte[] byteArray;
-    private Bitmap bitmap_BAR_CODE;
+    private Bitmap bitmap_QR_CODE;
     private LinearLayout ERROR_NAME;
     private LinearLayout ERROR_MOBILE;
     private LinearLayout ERROR_DATE;
@@ -108,7 +114,6 @@ public class Passdetails extends AppCompatActivity {
     private Dialog dialog;
     private Button   Payment;
     private ImageView Profile;
-    private ImageView Help;
     private ImageButton DOBDate;
     private String Mobiles;
     private ImageButton DOJDate;
@@ -218,6 +223,19 @@ public class Passdetails extends AppCompatActivity {
         CustomAdapter customAdapter1=new CustomAdapter(getApplicationContext(),PLACES);
         PLACES_SPINNER.setAdapter(customAdapter1);
 
+
+     /*   try {
+
+            bitmap_QR_CODE = encodeAsBitmap("PAY-06717943DP4144020LBHHADA",500);
+            Profile.setImageBitmap(bitmap_QR_CODE);
+          //  Glide.with(getApplicationContext()).load(bitmap_QR_CODE).into(Profile);
+
+        }
+        catch (Exception e)
+        {
+            Log.v("FAILED",e.getMessage().toString());
+            Toast.makeText(getApplicationContext(),"FAILED",Toast.LENGTH_SHORT).show();
+        } */
 
 
 
@@ -610,40 +628,29 @@ public class Passdetails extends AppCompatActivity {
         THE_TEST=0;
         super.onDestroy();
     }
-    Bitmap encodeAsBitmap(String contents, BarcodeFormat format, int img_width, int img_height) throws WriterException {
-        String contentsToEncode = contents;
-        if (contentsToEncode == null) {
-            return null;
-        }
-        Map<EncodeHintType, Object> hints = null;
-        String encoding = guessAppropriateEncoding(contentsToEncode);
-        if (encoding != null) {
-            hints = new EnumMap<>(EncodeHintType.class);
-            hints.put(EncodeHintType.CHARACTER_SET, encoding);
-        }
-        MultiFormatWriter writer = new MultiFormatWriter();
-        BitMatrix result;
-        try {
-            result = writer.encode(contentsToEncode, format, img_width, img_height, hints);
-        } catch (IllegalArgumentException iae) {
-            // Unsupported format
-            return null;
-        }
-        int width = result.getWidth();
-        int height = result.getHeight();
-        int[] pixels = new int[width * height];
-        for (int y = 0; y < height; y++) {
-            int offset = y * width;
-            for (int x = 0; x < width; x++) {
-                pixels[offset + x] = result.get(x, y) ? BLACK : WHITE;
-            }
-        }
+   Bitmap encodeAsBitmap(String str,int WIDTH) throws WriterException {
+       BitMatrix result;
+       try {
+           result = new MultiFormatWriter().encode(str,
+                   BarcodeFormat.QR_CODE, WIDTH, WIDTH, null);
+       } catch (IllegalArgumentException iae) {
+           // Unsupported format
+           return null;
+       }
+       int w = result.getWidth();
+       int h = result.getHeight();
+       int[] pixels = new int[w * h];
+       for (int y = 0; y < h; y++) {
+           int offset = y * w;
+           for (int x = 0; x < w; x++) {
+               pixels[offset + x] = result.get(x, y) ? BLACK : WHITE;
+           }
+       }
+       Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+       bitmap.setPixels(pixels, 0, w, 0, 0, w, h);
+       return bitmap;
+   }
 
-        Bitmap bitmap = Bitmap.createBitmap(width, height,
-                Bitmap.Config.ARGB_8888);
-        bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
-        return bitmap;
-    }
     private static String guessAppropriateEncoding(CharSequence contents) {
         // Very crude at the moment
         for (int i = 0; i < contents.length(); i++) {
@@ -680,16 +687,6 @@ public class Passdetails extends AppCompatActivity {
 
 
     private void SubmitApplication() {
-
-
-      /*  try {
-            Profile.setImageBitmap(bitmap_BAR_CODE);
-        }
-        catch (Exception e)
-        {
-                Toast.makeText(getApplicationContext(),"Can't be generated",Toast.LENGTH_SHORT).show();
-        } */
-
 
 
         final String Names=Name.getText().toString().trim();
@@ -937,14 +934,20 @@ public class Passdetails extends AppCompatActivity {
         {
             //when applicant scanned user id is selected
 
-                scaniduri=data.getData();
+            scaniduri=data.getData();
 
-                Glide.with(Passdetails.this)
-                        .load(scaniduri)
-                        .into(scan_id);
+            try {
+                Bitmap  bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), scaniduri);
+
+                int p[]=getResolution(bitmap.getWidth(),bitmap.getHeight());
+                Bitmap scaled=Bitmap.createScaledBitmap(bitmap,p[0],p[1],true);
+
+                scan_id.setImageBitmap(scaled);
 
 
-               // scan_id.setImageURI(scaniduri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
 
         }
@@ -967,9 +970,9 @@ public class Passdetails extends AppCompatActivity {
                         state=response.getString("state");
                         id=response.getString("id");
                // bitmap_BAR_CODE = encodeAsBitmap(id, BarcodeFormat.CODE_128, 600, 300);  -->Originally
-                        bitmap_BAR_CODE = encodeAsBitmap(id, BarcodeFormat.CODE_128, 1400, 400);
+                        bitmap_QR_CODE = encodeAsBitmap(id,500);
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        bitmap_BAR_CODE.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        bitmap_QR_CODE.compress(Bitmap.CompressFormat.PNG, 100, stream);
                         BARCODE_BYTE_ARRAY = stream.toByteArray();
 
 
