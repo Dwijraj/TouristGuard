@@ -20,7 +20,7 @@
 -dontwarn android.net.**
 -keep class firebaseapps.com.pass.ViewPass
 -keep class firebaseapps.com.pass.Application
-
+-dontwarn java.awt.**,javax.activation.**,java.beans.**
 -keep class *{
     public private *;
 }
